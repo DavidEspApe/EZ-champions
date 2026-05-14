@@ -21,7 +21,7 @@ function App() {
       {/* Botón flotante de guía adaptativo */}
       <GuideModal activeTab={activeMode} />
 
-      <NavigationBar 
+      <NavigationBar  
         activeMode={activeMode} 
         setActiveMode={setActiveMode} 
         weather={weather} 
