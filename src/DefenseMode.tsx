@@ -596,7 +596,7 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
             const isCrit = crits[idx];
 
             let atkStatUsed = move.overrideOffensiveStat === 'def' 
-              ? finalRivalDef 
+              ? defStatUsed 
               : (move.useTargetAttack ? baseUserAtk : (move.category === 'Physical' ? finalRivalAtk : finalRivalSpa));
               
             let defStatUsed = (move.category === 'Physical' || move.overrideDefensiveStat === 'def') 
