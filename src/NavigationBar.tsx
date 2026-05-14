@@ -1,0 +1,76 @@
+import { Zap, Crosshair, Shield, Settings, Sun, CloudRain, CloudFog, Snowflake, Leaf, Eye, Cloud } from 'lucide-react';
+import type { AppMode, Weather, Terrain } from './App';
+
+interface NavProps {
+  activeMode: AppMode; setActiveMode: (mode: AppMode) => void;
+  weather: Weather; setWeather: (w: Weather) => void;
+  terrain: Terrain; setTerrain: (t: Terrain) => void;
+}
+
+export default function NavigationBar({ activeMode, setActiveMode, weather, setWeather, terrain, setTerrain }: NavProps) {
+  const modes = [
+    { id: 'speed', label: 'Speed', icon: <Zap size={18} /> },
+    { id: 'attack', label: 'Attack', icon: <Crosshair size={18} /> },
+    { id: 'defense', label: 'Defense', icon: <Shield size={18} /> },
+    { id: 'advanced', label: 'Advanced', icon: <Settings size={18} /> },
+  ];
+
+  return (
+    <nav className="w-full bg-slate-900 border-b border-slate-800 text-white p-4 sticky top-0 z-50 shadow-lg min-h-[80px] flex items-center">
+      {/* Grid de 3 columnas fijas: 33% cada una */}
+      <div className="max-w-7xl mx-auto grid grid-cols-3 items-center w-full">
+        
+        {/* COLUMNA 1: LOGO (Alineado a la izquierda) */}
+        {/* CAMBIO: Usamos items-baseline para alinear las bases de los textos */}
+        <div className="flex items-baseline gap-2 justify-start">
+          {/* LOGO: Letras EZ, más grandes (text-3xl) y asomando por arriba */}
+          <div className="flex items-baseline shrink-0 font-black italic text-3xl tracking-tighter cursor-default select-none leading-none">
+            <span className="text-red-500">E</span>
+            <span className="text-white">Z</span>
+          </div>
+          
+          {/* TEXTO: Champions Calculator en dorado */}
+          <h1 className="text-xl font-bold tracking-tight text-yellow-500 hidden sm:block whitespace-nowrap select-none cursor-default leading-none">
+            Champions Calculator
+          </h1>
+        </div>
+
+        {/* COLUMNA 2: MODOS (Clavado en el centro absoluto) */}
+        <div className="flex justify-center">
+          <div className="flex bg-slate-800 p-1 rounded-full border border-slate-700">
+            {modes.map((mode) => (
+              <button 
+                key={mode.id} 
+                onClick={() => setActiveMode(mode.id as AppMode)} 
+                className={`flex items-center gap-2 px-3 py-1.5 lg:px-4 lg:py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeMode === mode.id ? 'bg-blue-600 text-white shadow-md' : 'text-slate-400 hover:text-white hover:bg-slate-700'}`}
+              >
+                {mode.icon} <span className="hidden md:inline">{mode.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* COLUMNA 3: TOGGLES (Alineado a la derecha) */}
+        <div className="flex justify-end min-h-[42px]">
+          {activeMode !== 'advanced' && (
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="flex items-center gap-1 bg-slate-800 p-1 rounded-xl border border-slate-700">
+                <button onClick={() => setWeather(weather === 'Sun' ? 'None' : 'Sun')} className={`p-1.5 rounded-lg transition-colors ${weather === 'Sun' ? 'bg-orange-500/20 text-orange-400' : 'text-slate-500 hover:text-slate-300'}`}><Sun size={18} /></button>
+                <button onClick={() => setWeather(weather === 'Rain' ? 'None' : 'Rain')} className={`p-1.5 rounded-lg transition-colors ${weather === 'Rain' ? 'bg-blue-500/20 text-blue-400' : 'text-slate-500 hover:text-slate-300'}`}><CloudRain size={18} /></button>
+                <button onClick={() => setWeather(weather === 'Sand' ? 'None' : 'Sand')} className={`p-1.5 rounded-lg transition-colors ${weather === 'Sand' ? 'bg-yellow-700/30 text-yellow-500' : 'text-slate-500 hover:text-slate-300'}`}><CloudFog size={18} /></button>
+                <button onClick={() => setWeather(weather === 'Snow' ? 'None' : 'Snow')} className={`p-1.5 rounded-lg transition-colors ${weather === 'Snow' ? 'bg-cyan-500/20 text-cyan-300' : 'text-slate-500 hover:text-slate-300'}`}><Snowflake size={18} /></button>
+              </div>
+              <div className="flex items-center gap-1 bg-slate-800 p-1 rounded-xl border border-slate-700">
+                <button onClick={() => setTerrain(terrain === 'Electric' ? 'None' : 'Electric')} className={`p-1.5 rounded-lg transition-colors ${terrain === 'Electric' ? 'bg-yellow-400/20 text-yellow-400' : 'text-slate-500 hover:text-slate-300'}`}><Zap size={18} /></button>
+                <button onClick={() => setTerrain(terrain === 'Grassy' ? 'None' : 'Grassy')} className={`p-1.5 rounded-lg transition-colors ${terrain === 'Grassy' ? 'bg-green-500/20 text-green-400' : 'text-slate-500 hover:text-slate-300'}`}><Leaf size={18} /></button>
+                <button onClick={() => setTerrain(terrain === 'Psychic' ? 'None' : 'Psychic')} className={`p-1.5 rounded-lg transition-colors ${terrain === 'Psychic' ? 'bg-pink-500/20 text-pink-400' : 'text-slate-500 hover:text-slate-300'}`}><Eye size={18} /></button>
+                <button onClick={() => setTerrain(terrain === 'Misty' ? 'None' : 'Misty')} className={`p-1.5 rounded-lg transition-colors ${terrain === 'Misty' ? 'bg-fuchsia-400/20 text-fuchsia-300' : 'text-slate-500 hover:text-slate-300'}`}><Cloud size={18} /></button>
+              </div>
+            </div>
+          )}
+        </div>
+
+      </div>
+    </nav>
+  );
+}
