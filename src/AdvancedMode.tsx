@@ -670,22 +670,23 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
         {/* SHOWDOWN MODAL IMPORT/EXPORT */}
         <ShowdownModal playerState={pState} updateState={(updates) => updateP(playerNum, updates)} />
         
-        <div className="space-y-1 overflow-x-auto [&::-webkit-scrollbar]:hidden pb-2">
-          <div className="bg-slate-900 p-2 rounded-lg border border-slate-700 flex items-center justify-between gap-1">
-            <span className="text-xs font-bold text-emerald-400 w-12"><Heart size={12} className="inline mr-1"/>HP</span>
-            <div className="w-[74px] shrink-0"></div>
-            <input type="range" min="0" max="32" value={pState.evs.hp} onChange={(e) => updateNested(playerNum, 'evs', 'hp', Number(e.target.value))} className="flex-1 mx-2 accent-emerald-500 rounded-full h-1.5 appearance-none cursor-pointer" style={getSliderStyle(pState.evs.hp, 'rgba(16, 185, 129, 0.4)')} />
-            <EvInput value={pState.evs.hp} onChange={(v) => updateNested(playerNum, 'evs', 'hp', v)} />
-            <span className="text-sm font-mono text-white font-bold w-8 text-right">{finalStats.hp}</span>
+        <div className="space-y-1 w-full max-w-full overflow-x-auto [&::-webkit-scrollbar]:hidden pb-2">
+          <div className="bg-slate-900 p-1 sm:p-2 rounded-lg border border-slate-700 flex items-center justify-between gap-1 min-w-max">
+            <span className="text-[10px] sm:text-xs font-bold text-emerald-400 w-10 sm:w-12 shrink-0"><Heart size={12} className="inline mr-0.5 sm:mr-1"/>HP</span>
+            <div className="shrink-0 invisible pointer-events-none"><StageSelect value={0} onChange={() => {}} /></div>
+            <div className="shrink-0 invisible pointer-events-none"><NatureSelect value={1} onChange={() => {}} /></div>
+            <input type="range" min="0" max="32" value={pState.evs.hp} onChange={(e) => updateNested(playerNum, 'evs', 'hp', Number(e.target.value))} className="w-10 sm:w-12 accent-emerald-500 rounded-full h-1.5 appearance-none cursor-pointer shrink-0" style={getSliderStyle(pState.evs.hp, 'rgba(16, 185, 129, 0.4)')} />
+            <div className="shrink-0"><EvInput value={pState.evs.hp} onChange={(v) => updateNested(playerNum, 'evs', 'hp', v)} /></div>
+            <span className="text-xs sm:text-sm font-mono text-white font-bold w-7 sm:w-8 text-right flex items-center gap-1 justify-end shrink-0">{finalStats.hp}</span>
           </div>
           {[ { key: 'atk', label: 'Atk', color: 'text-rose-400', icon: Swords, accent: 'accent-rose-500', rgba: 'rgba(244, 63, 94, 0.4)' }, { key: 'def', label: 'Def', color: 'text-orange-400', icon: ShieldAlert, accent: 'accent-orange-500', rgba: 'rgba(249, 115, 22, 0.4)' }, { key: 'spa', label: 'SpA', color: 'text-purple-400', icon: Swords, accent: 'accent-purple-500', rgba: 'rgba(168, 85, 247, 0.4)' }, { key: 'spd', label: 'SpD', color: 'text-indigo-400', icon: ShieldAlert, accent: 'accent-indigo-500', rgba: 'rgba(99, 102, 241, 0.4)' }, { key: 'spe', label: 'Spe', color: 'text-blue-400', icon: Zap, accent: 'accent-blue-500', rgba: 'rgba(59, 130, 246, 0.4)' } ].map(stat => (
-            <div key={stat.key} className="bg-slate-900 p-2 rounded-lg border border-slate-700 flex items-center justify-between gap-1">
-              <span className={`text-xs font-bold ${stat.color} w-12`}><stat.icon size={12} className="inline mr-1"/>{stat.label}</span>
-              <StageSelect value={pState.stages[stat.key as StatKey]} onChange={(v) => updateNested(playerNum, 'stages', stat.key as StatKey, v)} />
-              <NatureSelect value={pState.nature[stat.key as StatKey]} onChange={(v) => handleNatureChange(playerNum, pState, stat.key as StatKey, v)} />
-              <input type="range" min="0" max="32" value={pState.evs[stat.key as StatKey]} onChange={(e) => updateNested(playerNum, 'evs', stat.key as StatKey, Number(e.target.value))} className={`w-12 ${stat.accent} rounded-full h-1.5 appearance-none cursor-pointer`} style={getSliderStyle(pState.evs[stat.key as StatKey], stat.rgba)} />
-              <EvInput value={pState.evs[stat.key as StatKey]} onChange={(v) => updateNested(playerNum, 'evs', stat.key as StatKey, v)} />
-              <span className="text-sm font-mono text-white font-bold w-8 text-right flex items-center gap-1 justify-end">{finalStats[stat.key as StatKey]}</span>
+            <div key={stat.key} className="bg-slate-900 p-1 sm:p-2 rounded-lg border border-slate-700 flex items-center justify-between gap-1 min-w-max">
+              <span className={`text-[10px] sm:text-xs font-bold ${stat.color} w-10 sm:w-12 shrink-0`}><stat.icon size={12} className="inline mr-0.5 sm:mr-1"/>{stat.label}</span>
+              <div className="shrink-0"><StageSelect value={pState.stages[stat.key as StatKey]} onChange={(v) => updateNested(playerNum, 'stages', stat.key as StatKey, v)} /></div>
+              <div className="shrink-0"><NatureSelect value={pState.nature[stat.key as StatKey]} onChange={(v) => handleNatureChange(playerNum, pState, stat.key as StatKey, v)} /></div>
+              <input type="range" min="0" max="32" value={pState.evs[stat.key as StatKey]} onChange={(e) => updateNested(playerNum, 'evs', stat.key as StatKey, Number(e.target.value))} className={`w-10 sm:w-12 ${stat.accent} rounded-full h-1.5 appearance-none cursor-pointer shrink-0`} style={getSliderStyle(pState.evs[stat.key as StatKey], stat.rgba)} />
+              <div className="shrink-0"><EvInput value={pState.evs[stat.key as StatKey]} onChange={(v) => updateNested(playerNum, 'evs', stat.key as StatKey, v)} /></div>
+              <span className="text-xs sm:text-sm font-mono text-white font-bold w-7 sm:w-8 text-right flex items-center gap-1 justify-end shrink-0">{finalStats[stat.key as StatKey]}</span>
             </div>
           ))}
         </div>
