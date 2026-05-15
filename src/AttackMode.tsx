@@ -457,20 +457,20 @@ export default function AttackMode({ weather, terrain, setWeather, setTerrain }:
   const isFairyAuraOnField = checkAbility(userAbilityId, userAbility, 'Fairy Aura', 'Aura Feerica') || checkAbility(activeBuild.abilityId, rivalAbility, 'Fairy Aura', 'Aura Feerica');
 
   return (
-    <div className="max-w-7xl mx-auto p-4 grid xl:grid-cols-3 gap-6">
+    <div className="max-w-7xl mx-auto p-4 flex flex-col xl:grid xl:grid-cols-3 gap-6">
       <div className="bg-slate-800 rounded-xl border border-slate-700 p-5 col-span-1 flex flex-col gap-5">
         <div className="flex items-center justify-between border-b border-slate-700 pb-2">
           <div className="flex items-center gap-2 text-rose-400"><Crosshair size={20} /><h3 className="font-bold text-lg">Attacker (You)</h3></div>
           <button onClick={handleReset} title="Reset" className="p-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-400 hover:bg-rose-600 transition-colors"><RotateCcw size={14}/></button>
         </div>
-        <div className="flex items-start gap-4">
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-4 w-full">
           <div className="flex flex-col items-center gap-1.5 shrink-0">
             <div className="w-20 h-20 flex items-center justify-center bg-slate-900/50 rounded-xl border border-slate-700 shadow-inner overflow-hidden">
               <img src={getSpriteUrl(userSpeciesId)} alt={userPokemon.name} className="max-h-16 object-contain" onError={handleSpriteError} />
             </div>
             <div className="flex gap-1">{userPokemon.types.map(t => <span key={t} className={`${TYPE_COLORS[t]} text-white text-[8px] font-black px-1 rounded uppercase border border-black/10`}>{t.substring(0,3)}</span>)}</div>
           </div>
-          <div className="flex-1 flex flex-col justify-start">
+          <div className="flex-1 flex flex-col justify-start w-full">
             <label className="block text-sm mb-1 text-slate-400">Species</label>
             <PokemonSelector selectedId={userSpeciesId} onSelect={handleSpeciesChange} />
             
@@ -488,7 +488,7 @@ export default function AttackMode({ weather, terrain, setWeather, setTerrain }:
             )}
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
           <div><label className="block text-sm mb-1 text-slate-400 flex items-center gap-1"><Sparkles size={14}/> Ability</label>
             <select value={userAbilityId} onChange={(e) => setUserAbilityId(e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 outline-none text-rose-300">
               {userPokemon.abilities.map((ab: string) => <option key={ab} value={ab}>{ABILITIES_DB[ab]?.name || ab}</option>)}
@@ -511,7 +511,7 @@ export default function AttackMode({ weather, terrain, setWeather, setTerrain }:
               <button onClick={() => setIsDoubles(!isDoubles)} className={`px-2 py-0.5 rounded text-[10px] border flex items-center gap-1 ${isDoubles ? 'bg-indigo-600 border-indigo-400 text-white' : 'bg-slate-800 border-slate-700 text-slate-500'}`}><Users size={12}/> Double Target</button>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-2">{[0, 1, 2, 3].map(i => <MoveSelector key={i} selectedMoveId={userMoves[i]} learnset={userPokemon.learnset} onSelect={(id) => { const nm = [...userMoves]; nm[i] = id; setUserMoves(nm); }} />)}</div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">{[0, 1, 2, 3].map(i => <MoveSelector key={i} selectedMoveId={userMoves[i]} learnset={userPokemon.learnset} onSelect={(id) => { const nm = [...userMoves]; nm[i] = id; setUserMoves(nm); }} />)}</div>
         </div>
         <div className="space-y-4">
           <div className="bg-slate-900 p-4 rounded-xl border border-slate-700">
@@ -553,7 +553,7 @@ export default function AttackMode({ weather, terrain, setWeather, setTerrain }:
               <ShieldAlert size={14}/> Protect
             </button>
           </div>
-          <div className="flex flex-col md:flex-row gap-4 mb-4 items-start">
+          <div className="flex flex-col md:flex-row gap-4 mb-4 items-center md:items-start w-full">
             <div className="flex flex-col items-center gap-1.5 shrink-0">
               <div className="w-20 h-20 flex items-center justify-center bg-slate-900/50 rounded-xl border border-slate-700 shadow-inner overflow-hidden">
                 <img src={getSpriteUrl(rivalPokemon.id)} alt={rivalPokemon.name} className="max-h-16 object-contain" onError={handleSpriteError} />
@@ -584,7 +584,7 @@ export default function AttackMode({ weather, terrain, setWeather, setTerrain }:
               </div>
 
               {/* CAJAS ESTÁTICAS DE HABILIDAD Y OBJETO DE LA BUILD */}
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2 w-full">
                 <div className="p-2 flex-1 bg-slate-900/80 rounded border border-yellow-900/50 text-xs text-yellow-300 flex items-center gap-2">
                   <Sparkles size={14} className="shrink-0" />
                   <span className="truncate font-bold">{rivalAbility.name || 'No Ability'}</span>
@@ -597,7 +597,7 @@ export default function AttackMode({ weather, terrain, setWeather, setTerrain }:
             </div>
           </div>
           
-          <div className="grid grid-cols-3 gap-2 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-6">
             <div className="bg-slate-900 p-2 rounded-lg border border-slate-700 text-center">
               <span className="text-[10px] font-bold text-emerald-400 uppercase">Max HP</span>
               <div className="text-lg font-mono text-white">{rivalHp}</div>
@@ -621,7 +621,7 @@ export default function AttackMode({ weather, terrain, setWeather, setTerrain }:
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {userMoves.map((moveId, idx) => {
             const move = MOVES_DB[moveId]; 
             if (!move) return <div key={idx} className="rounded-xl border border-dashed border-slate-700 bg-slate-800/30 flex items-center justify-center p-8 text-slate-500 text-xs">Empty</div>;

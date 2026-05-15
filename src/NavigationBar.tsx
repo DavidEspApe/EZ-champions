@@ -17,12 +17,11 @@ export default function NavigationBar({ activeMode, setActiveMode, weather, setW
 
   return (
     <nav className="w-full bg-slate-900 border-b border-slate-800 text-white p-4 sticky top-0 z-50 shadow-lg min-h-[80px] flex items-center">
-      {/* Grid de 3 columnas fijas: 33% cada una */}
-      <div className="max-w-7xl mx-auto grid grid-cols-3 items-center w-full">
+      {/* Grid de 3 columnas fijas en desktop, flex-col en móvil */}
+      <div className="max-w-7xl mx-auto flex flex-col gap-3 md:grid md:grid-cols-3 items-center w-full">
         
-        {/* COLUMNA 1: LOGO (Alineado a la izquierda) */}
-        {/* CAMBIO: Usamos items-baseline para alinear las bases de los textos */}
-        <div className="flex items-baseline gap-2 justify-start">
+        {/* COLUMNA 1: LOGO (Centrado en móvil, Izquierda en desktop) */}
+        <div className="flex items-baseline gap-2 justify-center md:justify-start w-full">
           {/* LOGO: Letras EZ, más grandes (text-3xl) y asomando por arriba */}
           <div className="flex items-baseline shrink-0 font-black italic text-3xl tracking-tighter cursor-default select-none leading-none">
             <span className="text-red-500">E</span>
@@ -35,9 +34,9 @@ export default function NavigationBar({ activeMode, setActiveMode, weather, setW
           </h1>
         </div>
 
-        {/* COLUMNA 2: MODOS (Clavado en el centro absoluto) */}
-        <div className="flex justify-center">
-          <div className="flex bg-slate-800 p-1 rounded-full border border-slate-700">
+        {/* COLUMNA 2: MODOS (Centrado, con scroll en móvil) */}
+        <div className="flex justify-center w-full overflow-x-auto md:overflow-visible p-1 md:p-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          <div className="flex bg-slate-800 p-1 rounded-full border border-slate-700 min-w-max">
             {modes.map((mode) => (
               <button 
                 key={mode.id} 
@@ -50,10 +49,10 @@ export default function NavigationBar({ activeMode, setActiveMode, weather, setW
           </div>
         </div>
 
-        {/* COLUMNA 3: TOGGLES (Alineado a la derecha) */}
-        <div className="flex justify-end min-h-[42px]">
+        {/* COLUMNA 3: TOGGLES (Centrado en móvil, Derecha en desktop, con scroll en móvil) */}
+        <div className="flex justify-center md:justify-end min-h-[42px] w-full overflow-x-auto md:overflow-visible p-1 md:p-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {activeMode !== 'advanced' && (
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-nowrap items-center gap-2 min-w-max">
               <div className="flex items-center gap-1 bg-slate-800 p-1 rounded-xl border border-slate-700">
                 <button onClick={() => setWeather(weather === 'Sun' ? 'None' : 'Sun')} className={`p-1.5 rounded-lg transition-colors ${weather === 'Sun' ? 'bg-orange-500/20 text-orange-400' : 'text-slate-500 hover:text-slate-300'}`}><Sun size={18} /></button>
                 <button onClick={() => setWeather(weather === 'Rain' ? 'None' : 'Rain')} className={`p-1.5 rounded-lg transition-colors ${weather === 'Rain' ? 'bg-blue-500/20 text-blue-400' : 'text-slate-500 hover:text-slate-300'}`}><CloudRain size={18} /></button>

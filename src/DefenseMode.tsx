@@ -377,7 +377,7 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
   if (checkAbility(userAbilityId, userAbility, 'Marvel Scale', 'Escama Especial')) finalDefStat = Math.floor(finalDefStat * 1.5);
 
   return (
-    <div className="max-w-7xl mx-auto p-4 grid xl:grid-cols-3 gap-6">
+    <div className="max-w-7xl mx-auto p-4 flex flex-col xl:grid xl:grid-cols-3 gap-6">
       
       {/* --- PANEL DE TU POKÉMON (DEFENSOR) --- */}
       <div className="bg-slate-800 rounded-xl border border-slate-700 p-5 col-span-1 flex flex-col gap-5">
@@ -396,7 +396,7 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
           </div>
         </div>
 
-        <div className="flex items-start gap-4">
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-4 w-full">
           <div className="flex flex-col items-center gap-1.5 shrink-0">
             <div className="w-20 h-20 flex items-center justify-center bg-slate-900/50 rounded-xl border border-slate-700 shadow-inner overflow-hidden">
               <img src={getSpriteUrl(userSpeciesId)} alt={userPokemon.name} className="max-h-16 object-contain" onError={handleSpriteError} />
@@ -409,7 +409,7 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
               ))}
             </div>
           </div>
-          <div className="flex-1 flex flex-col justify-start">
+          <div className="flex-1 flex flex-col justify-start w-full">
             <label className="block text-sm mb-1 text-slate-400">Species</label>
             <PokemonSelector selectedId={userSpeciesId} onSelect={handleSpeciesChange} />
             
@@ -428,7 +428,7 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
           <div>
             <label className="block text-sm mb-1 text-slate-400 flex items-center gap-1"><Sparkles size={14}/> Ability</label>
             <select value={userAbilityId} onChange={(e) => setUserAbilityId(e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 outline-none text-blue-300">
@@ -513,7 +513,7 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
             </div>
           </div>
           
-          <div className="flex flex-col md:flex-row gap-4 mb-4 items-start">
+          <div className="flex flex-col md:flex-row gap-4 mb-4 items-center md:items-start w-full">
             <div className="flex flex-col items-center gap-1.5 shrink-0">
               <div className="w-20 h-20 flex items-center justify-center bg-slate-900/50 rounded-xl border border-slate-700 shadow-inner overflow-hidden">
                 <img src={getSpriteUrl(rivalPokemon.id)} alt={rivalPokemon.name} className="max-h-16 object-contain" onError={handleSpriteError} />
@@ -550,7 +550,7 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
               </div>
 
               {/* CAJAS ESTÁTICAS DE HABILIDAD Y OBJETO DE LA BUILD */}
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2 w-full">
                 <div className="p-2 flex-1 bg-slate-900/80 rounded border border-yellow-900/50 text-xs text-yellow-300 flex items-center gap-2">
                   <Sparkles size={14} className="shrink-0" />
                   <span className="truncate font-bold">{rivalAbility.name}</span>
@@ -563,7 +563,7 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
             </div>
           </div>
             
-          <div className="grid grid-cols-2 gap-3 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
             <div className="bg-slate-900 p-3 rounded-lg border border-slate-700 flex flex-col justify-center">
               <span className="text-[10px] font-bold text-rose-400 uppercase tracking-wider mb-1 flex items-center justify-between">
                 Physical Attack
@@ -588,7 +588,7 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
         </div>
 
         {/* --- CÁLCULO DE DAÑO Y MOTOR SÚPER-AVANZADO --- */}
-        <div className="grid sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {activeBuild.moves.map((moveId, idx) => {
             const move = MOVES_DB[moveId]; 
             if (!move) return <div key={idx} className="rounded-xl border border-dashed border-slate-700 bg-slate-800/30 flex items-center justify-center p-8 text-slate-500 text-xs">Empty</div>;

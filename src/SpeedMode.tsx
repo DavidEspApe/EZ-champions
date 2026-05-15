@@ -406,21 +406,21 @@ export default function SpeedMode({ weather, terrain, setWeather, setTerrain }: 
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-slate-800 rounded-xl border border-slate-700 p-5 flex flex-col">
           <div className="flex items-center justify-between mb-4 border-b border-slate-700 pb-2">
             <div className="flex items-center gap-2 text-blue-400"><Gauge size={20} /><h3 className="font-bold text-lg">Your Pokémon</h3></div>
             <button onClick={handleReset} title="Reset" className="p-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-400 hover:text-white hover:bg-rose-600 transition-colors"><RotateCcw size={14}/></button>
           </div>
           <div className="space-y-4 flex-1">
-            <div className="flex items-start gap-4">
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-4 w-full">
               <div className="flex flex-col items-center gap-1.5 shrink-0">
                 <div className="w-20 h-20 flex items-center justify-center bg-slate-900/50 rounded-xl border border-slate-700 shadow-inner overflow-hidden">
                   <img src={getSpriteUrl(userSpeciesId)} alt={userPokemon.name} className="max-h-16 object-contain" onError={handleSpriteError} />
                 </div>
                 <div className="flex gap-1">{userPokemon.types.map(t => <span key={t} className={`${TYPE_COLORS[t]} text-white text-[8px] font-black px-1 rounded uppercase border border-black/10`}>{t.substring(0,3)}</span>)}</div>
               </div>
-              <div className="flex-1 flex flex-col justify-start">
+              <div className="flex-1 flex flex-col justify-start w-full">
             <label className="block text-sm mb-1 text-slate-400">Species</label>
             <PokemonSelector selectedId={userSpeciesId} onSelect={handleSpeciesChange} />
             
@@ -438,7 +438,7 @@ export default function SpeedMode({ weather, terrain, setWeather, setTerrain }: 
             )}
           </div>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
               <div><label className="block text-sm mb-1 text-slate-400 flex items-center gap-1"><Sparkles size={14}/> Ability</label>
                 <select value={userAbilityId} onChange={(e) => setUserAbilityId(e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 outline-none text-blue-300">
                   {userPokemon.abilities.map((ab: string) => <option key={ab} value={ab}>{ABILITIES_DB[ab]?.name || ab}</option>)}
@@ -485,7 +485,7 @@ export default function SpeedMode({ weather, terrain, setWeather, setTerrain }: 
         <div className="bg-slate-800 rounded-xl border border-slate-700 p-5 flex flex-col">
           <div className="flex items-center gap-2 mb-4 text-rose-400 border-b border-slate-700 pb-2"><Crosshair size={20} /><h3 className="font-bold text-lg">Rival Build</h3></div>
           <div className="space-y-4 flex-1">
-            <div className="flex items-start gap-4">
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-4 w-full">
               <div className="flex flex-col items-center gap-1.5 shrink-0">
                 <div className="w-20 h-20 flex items-center justify-center bg-slate-900/50 rounded-xl border border-slate-700 shadow-inner overflow-hidden">
                   <img 
@@ -497,7 +497,7 @@ export default function SpeedMode({ weather, terrain, setWeather, setTerrain }: 
                 </div>
                 <div className="flex gap-1">{rivalPokemon.types.map(t => <span key={t} className={`${TYPE_COLORS[t]} text-white text-[8px] font-black px-1 rounded uppercase border border-black/10`}>{t.substring(0,3)}</span>)}</div>
               </div>
-              <div className="flex-1">
+              <div className="flex-1 w-full">
                 <label className="block text-sm mb-1 text-slate-400">Select Rival</label>
                 <SpeedBuildSelector selectedId={rivalBuildId} onSelect={handleRivalChange} />
                 {/* BOTÓN INTELIGENTE DEL RIVAL */}

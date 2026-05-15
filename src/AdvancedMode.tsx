@@ -608,7 +608,7 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
           </button>
         </div>
         
-        <div className="flex items-start gap-3">
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-3 w-full">
           <div className="flex flex-col items-center gap-1.5 shrink-0">
             <div className="w-16 h-16 flex items-center justify-center bg-slate-900/80 rounded-lg border border-slate-700 shadow-inner overflow-hidden relative">
               <img src={getSpriteUrl(poke.id)} alt={poke.name} className="max-h-12 object-contain" onError={handleSpriteError} />
@@ -616,7 +616,7 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
             <div className="flex gap-1">{poke.types.map((t: string) => <span key={t} className={`${TYPE_COLORS[t]} text-white text-[8px] font-black px-1 rounded uppercase border border-black/10`}>{t.substring(0,3)}</span>)}</div>
           </div>
           
-          <div className="flex-1 space-y-2">
+          <div className="flex-1 space-y-2 w-full">
             <PokemonSelector 
             selectedId={pState.speciesId} 
             onSelect={(id) => { 
@@ -650,7 +650,7 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
             );
           })()}
 
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
               <AbilitySelector selectedId={pState.abilityId} onSelect={(id) => updateSingleP(playerNum, 'abilityId', id)} abilities={poke.abilities} colorClass="text-yellow-300 hover:border-yellow-500" />
               <ItemSelector 
                   selectedId={pState.itemId} 
@@ -664,13 +664,13 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
         
         <div className="bg-slate-900/50 p-2 rounded-lg border border-slate-700">
           <label className="block text-[10px] font-bold text-slate-400 uppercase mb-1">Moves</label>
-          <div className="grid grid-cols-2 gap-1">{[0, 1, 2, 3].map(i => <MoveSelector key={i} selectedMoveId={pState.moves[i]} learnset={poke.learnset} onSelect={(id) => { const nm = [...pState.moves]; nm[i] = id; updateSingleP(playerNum, 'moves', nm); }} />)}</div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 w-full">{[0, 1, 2, 3].map(i => <MoveSelector key={i} selectedMoveId={pState.moves[i]} learnset={poke.learnset} onSelect={(id) => { const nm = [...pState.moves]; nm[i] = id; updateSingleP(playerNum, 'moves', nm); }} />)}</div>
         </div>
 
         {/* SHOWDOWN MODAL IMPORT/EXPORT */}
         <ShowdownModal playerState={pState} updateState={(updates) => updateP(playerNum, updates)} />
         
-        <div className="space-y-1">
+        <div className="space-y-1 overflow-x-auto [&::-webkit-scrollbar]:hidden pb-2">
           <div className="bg-slate-900 p-2 rounded-lg border border-slate-700 flex items-center justify-between gap-1">
             <span className="text-xs font-bold text-emerald-400 w-12"><Heart size={12} className="inline mr-1"/>HP</span>
             <div className="w-[74px] shrink-0"></div>
@@ -1020,7 +1020,7 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
 
   return (
     <div className="max-w-7xl mx-auto p-4 space-y-6">
-      <div className="grid lg:grid-cols-[1fr_240px_1fr] gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_240px_1fr] gap-4">
         <div className="flex gap-3">
           <div className="flex-1 min-w-0">{renderPlayerColumn(1, p1, p1Stats)}</div>
         </div>
@@ -1075,7 +1075,7 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
 
       <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700 shadow-inner">
         <h3 className="text-center font-black text-slate-500 uppercase tracking-widest mb-6 text-xs">Damage Exchange</h3>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2"><h4 className="text-sm font-bold text-blue-400 flex items-center gap-2"><Swords size={14}/> Pokémon A attacks B</h4>{renderDamageBars(1, p1, p2, p1Stats, p2Stats)}</div>
           <div className="space-y-2"><h4 className="text-sm font-bold text-rose-400 flex items-center gap-2"><Swords size={14}/> Pokémon B attacks A</h4>{renderDamageBars(2, p2, p1, p2Stats, p1Stats)}</div>
         </div>

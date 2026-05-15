@@ -30,7 +30,7 @@ function App() {
         setTerrain={setTerrain} 
       />
       
-      <main className="container mx-auto py-8">
+      <main className="container mx-auto px-4 py-4 md:py-8 md:px-8">
         {activeMode === 'speed' && <SpeedMode weather={weather} terrain={terrain} setWeather={setWeather} setTerrain={setTerrain} />}
         {activeMode === 'attack' && <AttackMode weather={weather} terrain={terrain} setWeather={setWeather} setTerrain={setTerrain} />}
         {activeMode === 'defense' && <DefenseMode weather={weather} terrain={terrain} setWeather={setWeather} setTerrain={setTerrain} />}
