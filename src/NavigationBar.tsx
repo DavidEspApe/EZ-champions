@@ -16,9 +16,9 @@ export default function NavigationBar({ activeMode, setActiveMode, weather, setW
   ];
 
   return (
-    <nav className="w-full bg-slate-900 border-b border-slate-800 text-white p-4 sticky top-0 z-50 shadow-lg min-h-[80px] flex items-center">
+    <nav className="w-full bg-slate-900 border-b border-slate-800 text-white p-4 landscape:py-1 landscape:md:py-4 sticky top-0 z-50 shadow-lg min-h-[80px] landscape:min-h-[50px] landscape:md:min-h-[80px] flex items-center">
       {/* Grid de 3 columnas fijas en desktop, flex-col en móvil */}
-      <div className="max-w-7xl mx-auto flex flex-col gap-3 md:grid md:grid-cols-3 items-center w-full">
+      <div className="max-w-7xl mx-auto flex flex-col gap-3 landscape:gap-1 landscape:md:gap-3 md:grid md:grid-cols-3 items-center w-full">
         
         {/* COLUMNA 1: LOGO (Centrado en móvil, Izquierda en desktop) */}
         <div className="flex items-baseline gap-2 justify-center md:justify-start w-full">
@@ -41,7 +41,7 @@ export default function NavigationBar({ activeMode, setActiveMode, weather, setW
               <button 
                 key={mode.id} 
                 onClick={() => setActiveMode(mode.id as AppMode)} 
-                className={`flex items-center gap-2 px-3 py-1.5 lg:px-4 lg:py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeMode === mode.id ? 'bg-blue-600 text-white shadow-md' : 'text-slate-400 hover:text-white hover:bg-slate-700'}`}
+                className={`flex items-center gap-2 px-3 py-1.5 landscape:py-0.5 landscape:md:py-1.5 lg:px-4 lg:py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeMode === mode.id ? 'bg-blue-600 text-white shadow-md' : 'text-slate-400 hover:text-white hover:bg-slate-700'}`}
               >
                 {mode.icon} <span className="hidden md:inline">{mode.label}</span>
               </button>

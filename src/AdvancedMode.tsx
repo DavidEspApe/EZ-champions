@@ -595,7 +595,7 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
     const isP1 = playerNum === 1;
 
     return (
-      <div className="bg-slate-800 rounded-xl border border-slate-700 p-4 flex flex-col gap-4 shadow-lg h-full">
+      <div className="bg-slate-800 rounded-xl border border-slate-700 p-4 flex flex-col gap-4 shadow-lg h-full min-w-0">
         <div className="flex justify-between items-center border-b border-slate-700 pb-2">
           <h3 className={`font-bold text-lg flex items-center gap-2 ${isP1 ? 'text-blue-400' : 'text-rose-400'}`}><Crosshair size={18}/> {isP1 ? 'Pokémon A' : 'Pokémon B'}</h3>
           {/* BOTÓN INDIVIDUAL DE RESETEO */}
