@@ -377,11 +377,11 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
   if (checkAbility(userAbilityId, userAbility, 'Marvel Scale', 'Escama Especial')) finalDefStat = Math.floor(finalDefStat * 1.5);
 
   return (
-    <div className="max-w-7xl mx-auto p-4 flex flex-col xl:grid xl:grid-cols-3 gap-6">
+    <div className="flex flex-col xl:grid xl:grid-cols-3 gap-4 xl:gap-8 w-full max-w-7xl mx-auto p-4">
       
       {/* --- PANEL DE TU POKÉMON (DEFENSOR) --- */}
-      <div className="bg-slate-800 rounded-xl border border-slate-700 p-5 col-span-1 flex flex-col gap-5">
-        <div className="flex items-center justify-between border-b border-slate-700 pb-2">
+      <div className="bg-slate-800 rounded-xl border border-slate-700 p-3 sm:p-5 col-span-1 flex flex-col gap-4 sm:gap-5 overflow-hidden">
+        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-2 border-b border-slate-700 pb-2">
           <div className="flex items-center gap-2 text-blue-400">
             <Shield size={20} />
             <h3 className="font-bold text-lg">Defender (You)</h3>
@@ -396,7 +396,7 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-4 w-full">
+        <div className="flex flex-col xl:flex-row items-center xl:items-start gap-4 w-full">
           <div className="flex flex-col items-center gap-1.5 shrink-0">
             <div className="w-20 h-20 flex items-center justify-center bg-slate-900/50 rounded-xl border border-slate-700 shadow-inner overflow-hidden">
               <img src={getSpriteUrl(userSpeciesId)} alt={userPokemon.name} className="max-h-16 object-contain" onError={handleSpriteError} />
@@ -428,7 +428,7 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-2 xl:gap-3 w-full">
           <div>
             <label className="block text-sm mb-1 text-slate-400 flex items-center gap-1"><Sparkles size={14}/> Ability</label>
             <select value={userAbilityId} onChange={(e) => setUserAbilityId(e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 outline-none text-blue-300">
@@ -447,8 +447,8 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
         </div>
 
         <div className="space-y-4 mt-2">
-          <div className="bg-slate-900 p-4 rounded-xl border border-slate-700">
-            <div className="flex justify-between items-center mb-2">
+          <div className="bg-slate-900 p-3 sm:p-4 rounded-xl border border-slate-700">
+            <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-2 mb-2">
               <span className="flex items-center gap-2 font-bold text-emerald-400"><Heart size={16}/> HP</span>
               <span className="text-xl font-mono text-white">{currentHp}</span>
             </div>
@@ -458,8 +458,8 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
               <EvInput value={hpEvs} onChange={setHpEvs} />
             </div>
           </div>
-          <div className="bg-slate-900 p-4 rounded-xl border border-slate-700">
-            <div className="flex justify-between items-center mb-2">
+          <div className="bg-slate-900 p-3 sm:p-4 rounded-xl border border-slate-700">
+            <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-2 mb-2">
               <span className="flex items-center gap-1 font-bold text-orange-400"><ShieldAlert size={16}/> Physical Def</span>
               <div className="flex items-center gap-2">
                 <NatureSelect value={defNature} onChange={setDefNature} />
@@ -475,8 +475,8 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
               <EvInput value={defEvs} onChange={setDefEvs} />
             </div>
           </div>
-          <div className="bg-slate-900 p-4 rounded-xl border border-slate-700">
-            <div className="flex justify-between items-center mb-2">
+          <div className="bg-slate-900 p-3 sm:p-4 rounded-xl border border-slate-700">
+            <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-2 mb-2">
               <span className="flex items-center gap-1 font-bold text-indigo-400"><Activity size={16}/> Special Def</span>
               <div className="flex items-center gap-2">
                 <NatureSelect value={spdNature} onChange={setSpdNature} />
@@ -497,8 +497,8 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
 
       {/* --- PANEL DEL RIVAL (ATACANTE) --- */}
       <div className="col-span-1 xl:col-span-2 space-y-6">
-        <div className="bg-slate-800 border border-slate-700 rounded-xl p-5">
-          <div className="flex items-center justify-between border-b border-slate-700 pb-2 mb-4">
+        <div className="bg-slate-800 border border-slate-700 rounded-xl p-3 sm:p-5 overflow-hidden">
+          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-2 border-b border-slate-700 pb-2 mb-4">
             <div className="flex items-center gap-2 text-rose-400">
               <Crosshair size={20} />
               <h3 className="font-bold text-lg">Attacker (Rival)</h3>
@@ -513,7 +513,7 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
             </div>
           </div>
           
-          <div className="flex flex-col md:flex-row gap-4 mb-4 items-center md:items-start w-full">
+          <div className="flex flex-col xl:flex-row gap-4 mb-4 items-center xl:items-start w-full">
             <div className="flex flex-col items-center gap-1.5 shrink-0">
               <div className="w-20 h-20 flex items-center justify-center bg-slate-900/50 rounded-xl border border-slate-700 shadow-inner overflow-hidden">
                 <img src={getSpriteUrl(rivalPokemon.id)} alt={rivalPokemon.name} className="max-h-16 object-contain" onError={handleSpriteError} />
@@ -550,7 +550,7 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
               </div>
 
               {/* CAJAS ESTÁTICAS DE HABILIDAD Y OBJETO DE LA BUILD */}
-              <div className="flex flex-col sm:flex-row gap-2 w-full">
+              <div className="flex flex-col xl:flex-row gap-2 w-full">
                 <div className="p-2 flex-1 bg-slate-900/80 rounded border border-yellow-900/50 text-xs text-yellow-300 flex items-center gap-2">
                   <Sparkles size={14} className="shrink-0" />
                   <span className="truncate font-bold">{rivalAbility.name}</span>
@@ -563,7 +563,7 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
             </div>
           </div>
             
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-2 xl:gap-3 mb-6">
             <div className="bg-slate-900 p-3 rounded-lg border border-slate-700 flex flex-col justify-center">
               <span className="text-[10px] font-bold text-rose-400 uppercase tracking-wider mb-1 flex items-center justify-between">
                 Physical Attack
@@ -588,7 +588,7 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
         </div>
 
         {/* --- CÁLCULO DE DAÑO Y MOTOR SÚPER-AVANZADO --- */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-2 w-full">
           {activeBuild.moves.map((moveId, idx) => {
             const move = MOVES_DB[moveId]; 
             if (!move) return <div key={idx} className="rounded-xl border border-dashed border-slate-700 bg-slate-800/30 flex items-center justify-center p-8 text-slate-500 text-xs">Empty</div>;
@@ -817,13 +817,13 @@ export default function DefenseMode({ weather, terrain, setWeather, setTerrain }
 
             return (
               <div key={idx} className={`relative overflow-hidden rounded-xl border p-4 transition-all ${isProtected || isImmune ? 'opacity-60 bg-slate-800 border-slate-700/50' : isDeadly ? 'bg-rose-900/10 border-rose-700/50' : 'bg-slate-800 border-slate-700'}`}>
-                <div className="flex justify-between items-start mb-4 relative z-10">
-                  <div className="w-full">
+                <div className="flex justify-between items-start mb-4 relative z-10 px-1 sm:px-0">
+                  <div className="flex-1 min-w-0">
                     
                     {/* LAYOUT DE TIPO - NOMBRE - POTENCIA - CATEGORÍA */}
                     <div className="flex items-center gap-1.5 w-full">
                       <img src={`/sprites/${moveType.toLowerCase()}.png`} alt={moveType} className="h-4 object-contain shrink-0" onError={handleIconError} title={moveType} />
-                      <h4 className="font-bold text-sm text-white truncate max-w-[140px]">{move.name}</h4>
+                      <h4 className="font-bold text-sm text-white flex-1 whitespace-normal break-words leading-tight">{move.name}</h4>
                       <span className="text-[10px] font-mono text-slate-400 font-bold bg-slate-900/50 px-1 rounded border border-slate-700/50 shrink-0" title="Base Power">
                         {finalMovePower > 0 ? finalMovePower : '-'}
                       </span>
