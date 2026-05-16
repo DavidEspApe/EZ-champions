@@ -1020,8 +1020,9 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-4 space-y-6 landscape:scale-90 landscape:origin-top landscape:-mx-4 lg:landscape:scale-100 lg:landscape:mx-auto">
-      <div className="grid grid-cols-1 landscape:grid-cols-[1fr_200px_1fr] lg:grid-cols-[1fr_240px_1fr] gap-4">
+    <div className="max-w-7xl mx-auto p-4 space-y-6">
+      <div className="w-full overflow-x-auto pb-4 scrollbar-thin">
+        <div className="grid grid-cols-[1fr_200px_1fr] lg:grid-cols-[1fr_240px_1fr] gap-4 min-w-[900px] xl:min-w-0">
         <div className="flex gap-3">
           <div className="flex-1 min-w-0">{renderPlayerColumn(1, p1, p1Stats)}</div>
         </div>
@@ -1073,6 +1074,8 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
           <div className="flex-1 min-w-0">{renderPlayerColumn(2, p2, p2Stats)}</div>
         </div>
       </div>
+      </div>
+
 
       <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700 shadow-inner">
         <h3 className="text-center font-black text-slate-500 uppercase tracking-widest mb-6 text-xs">Damage Exchange</h3>
