@@ -127,13 +127,13 @@ export const VGC_BUILDS: VGCBuild[] = [
     moves: ['highhorsepower', 'ironhead', 'rockslide', 'earthquake']
   },
   {
-    id: 'floettemega_off', name: 'Mega Floette - Offensive', speciesId: 'floettemega', itemId: 'floettite', abilityId: 'Flower Veil',
+    id: 'floetteeternalmega_off', name: 'Mega Floette - Offensive', speciesId: 'floetteeternalmega', itemId: 'floettite', abilityId: 'Flower Veil',
     defaultEvs: { hp: 2, atk: 0, def: 0, spa: 32, spd: 0, spe: 32 },
     defaultNature: { atk: 0.9, def: 1.0, spa: 1.0, spd: 1.0, spe: 1.1 },
     moves: ['moonblast', 'dazzlinggleam', 'lightofruin', 'protect']
   },
   {
-    id: 'floettemega_cm', name: 'Mega Floette - Calm Mind', speciesId: 'floettemega', itemId: 'floettite', abilityId: 'Flower Veil',
+    id: 'floetteeternalmega_cm', name: 'Mega Floette - Calm Mind', speciesId: 'floetteeternalmega', itemId: 'floettite', abilityId: 'Flower Veil',
     defaultEvs: { hp: 26, atk: 0, def: 2, spa: 25, spd: 0, spe: 13 },
     defaultNature: { atk: 0.9, def: 1.0, spa: 1.1, spd: 1.0, spe: 1.0 },
     moves: ['moonblast', 'dazzlinggleam', 'drainingkiss', 'calmmind']
@@ -479,10 +479,10 @@ export const SPEED_THREATS = [
   { id: 'sinistcha_slowest', name: 'Sinistcha - slowest', speciesId: 'sinistcha', itemId: 'None', abilityId: 'No Ability', defaultEvs: 0, defaultNature: 0.9 },
 
   // Mega Floette
-  { id: 'floettemega_fastest', name: 'Mega Floette - fastest', speciesId: 'floettemega', itemId: 'None', abilityId: 'No Ability', defaultEvs: 32, defaultNature: 1.1 },
-  { id: 'floettemega_maxevs', name: 'Mega Floette - maxEVs', speciesId: 'floettemega', itemId: 'None', abilityId: 'No Ability', defaultEvs: 32, defaultNature: 1.0 },
-  { id: 'floettemega_base', name: 'Mega Floette - Base', speciesId: 'floettemega', itemId: 'None', abilityId: 'No Ability', defaultEvs: 0, defaultNature: 1.0 },
-  { id: 'floettemega_slowest', name: 'Mega Floette - slowest', speciesId: 'floettemega', itemId: 'None', abilityId: 'No Ability', defaultEvs: 0, defaultNature: 0.9 },
+  { id: 'floetteeternalmega_fastest', name: 'Mega Floette - fastest', speciesId: 'floetteeternalmega', itemId: 'None', abilityId: 'No Ability', defaultEvs: 32, defaultNature: 1.1 },
+  { id: 'floetteeternalmega_maxevs', name: 'Mega Floette - maxEVs', speciesId: 'floetteeternalmega', itemId: 'None', abilityId: 'No Ability', defaultEvs: 32, defaultNature: 1.0 },
+  { id: 'floetteeternalmega_base', name: 'Mega Floette - Base', speciesId: 'floetteeternalmega', itemId: 'None', abilityId: 'No Ability', defaultEvs: 0, defaultNature: 1.0 },
+  { id: 'floetteeternalmega_slowest', name: 'Mega Floette - slowest', speciesId: 'floetteeternalmega', itemId: 'None', abilityId: 'No Ability', defaultEvs: 0, defaultNature: 0.9 },
 
   // Mega Charizard Y
   { id: 'charizardmegay_fastest', name: 'Mega Charizard Y - fastest', speciesId: 'charizardmegay', itemId: 'None', abilityId: 'No Ability', defaultEvs: 32, defaultNature: 1.1 },

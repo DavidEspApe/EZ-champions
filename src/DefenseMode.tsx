@@ -27,7 +27,7 @@ const getSpriteUrl = (id: string) => {
     'basculegionm': 'basculegion', 'basculegionf': 'basculegion-f', 'aegislash': 'aegislash', 'aegislashblade': 'aegislash-blade', 
     'palafinhero': 'palafin-hero', 'megameganium': 'meganium-mega', 'feraligatrmega': 'feraligatr-mega',
     'typhlosionmega': 'typhlosion-mega', 'dragonitemega': 'dragonite-mega', 'glimmoramega': 'glimmora-mega',
-    'lycanrocmidnight': 'lycanroc-midnight', 'lycanrocdusk': 'lycanroc-dusk'
+    'lycanrocmidnight': 'lycanroc-midnight', 'lycanrocdusk': 'lycanroc-dusk', 'floetteeternalmega': 'floette-eternal'
   };
   let cleanId = id.replace('_', '');
   if (spriteFixes[id]) cleanId = spriteFixes[id];

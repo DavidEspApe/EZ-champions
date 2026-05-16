@@ -19,6 +19,7 @@ const TYPE_COLORS: Record<string, string> = {
 
 const getSpriteUrl = (id: string) => {
   if (!id) return '';
+  if (id === 'floetteeternalmega') return '/sprites/floetteeternalmega.png';
   if (POKEDEX[id] && POKEDEX[id].sprite) return POKEDEX[id].sprite;
 
   const spriteFixes: Record<string, string> = {

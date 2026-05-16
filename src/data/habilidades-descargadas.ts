@@ -1040,7 +1040,7 @@ export const POKEMON_ABILITIES: Record<string, string[]> = {
   "greninjamega": [
     "Protean"
   ],
-  "floettemega": [
+  "floetteeternalmega": [
     "Fairy Aura"
   ],
   "meowsticmega": [

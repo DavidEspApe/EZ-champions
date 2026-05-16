@@ -21,12 +21,12 @@ const TYPE_COLORS: Record<string, string> = {
 // --- SISTEMA DE SPRITES HD Y RESCATE LOCAL ---
 const getSpriteUrl = (id: string) => {
   if (!id) return '';
+  if (id === 'floetteeternalmega') return '/sprites/floetteeternalmega.png';
   if (POKEDEX[id] && POKEDEX[id].sprite) return POKEDEX[id].sprite;
   const spriteFixes: Record<string, string> = {
     'rotomwash': 'rotom-wash', 'rotomheat': 'rotom-heat', 'rotommow': 'rotom-mow', 'rotomfrost': 'rotom-frost', 'rotomfan': 'rotom-fan', 
     'basculegionm': 'basculegion', 'basculegionf': 'basculegion-f', 'aegislash': 'aegislash', 'aegislashblade': 'aegislash-blade', 
     'palafinhero': 'palafin-hero', 'megameganium': 'meganium-mega', 'feraligatrmega': 'feraligatr-mega',
-    'typhlosionmega': 'typhlosion-mega', 'dragonitemega': 'dragonite-mega', 'glimmoramega': 'glimmora-mega',
     'lycanrocmidnight': 'lycanroc-midnight', 'lycanrocdusk': 'lycanroc-dusk'
   };
   let cleanId = id.replace('_', '');

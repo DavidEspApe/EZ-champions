@@ -15,7 +15,7 @@ export const CUSTOM_POKEDEX: Record<string, any> = {
   'chesnaughtmega': { id: 'chesnaughtmega', name: 'Chesnaught-Mega', baseStats: { hp: 88, atk: 137, def: 172, spa: 74, spd: 115, spe: 44 }, abilities: ['Bulletproof'], baseSpecies: 'chesnaught',weightkg: 90 },
   'delphoxmega': { id: 'delphoxmega', name: 'Delphox-Mega', baseStats: { hp: 75, atk: 69, def: 72, spa: 159, spd: 125, spe: 134 }, abilities: ['Levitate'], baseSpecies: 'delphox',weightkg: 39 },
   'greninjamega': { id: 'greninjamega', name: 'Greninja-Mega', baseStats: { hp: 72, atk: 125, def: 77, spa: 133, spd: 81, spe: 142 }, abilities: ['Protean'], baseSpecies: 'greninja',weightkg: 40 },
-  'floettemega': { id: 'floettemega', name: 'Floette-Mega', baseStats: { hp: 74, atk: 85, def: 87, spa: 155, spd: 148, spe: 102 }, abilities: ['Fairy Aura'], baseSpecies: 'floetteeternal',weightkg: 100.8 },
+  'floetteeternalmega': { id: 'floetteeternalmega', name: 'Floette-Mega', baseStats: { hp: 74, atk: 85, def: 87, spa: 155, spd: 148, spe: 102 }, abilities: ['Fairy Aura'], baseSpecies: 'floetteeternal',weightkg: 100.8 },
   'hawluchamega': { id: 'hawluchamega', name: 'Hawlucha-Mega', baseStats: { hp: 78, atk: 137, def: 100, spa: 74, spd: 93, spe: 118 }, abilities: ['No Guard'], baseSpecies: 'hawlucha' ,weightkg: 25},
   'drampamega': { id: 'drampamega', name: 'Drampa-Mega', baseStats: { hp: 78, atk: 85, def: 110, spa: 160, spd: 116, spe: 36 }, abilities: ['Berserk'], baseSpecies: 'drampa' ,weightkg: 240.5},
   'chimechomega': { id: 'chimechomega', name: 'Chimecho-Mega', baseStats: { hp: 75, atk: 50, def: 110, spa: 135, spd: 120, spe: 65 }, abilities: ['Levitate'], baseSpecies: 'chimecho',types: ['Psychic','Steel'] ,weightkg: 8},

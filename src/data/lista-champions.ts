@@ -59,6 +59,6 @@ export const CHAMPIONS_ROSTER = [
   'clefablemega', 'victreebelmega', 'starmiemega', 'dragonitemega', 'meganiummega', 
   'feraligatrmega', 'skarmorymega', 'chimechomega', 'froslassmega', 'emboarmega', 
   'excadrillmega', 'chandeluremega', 'golurkmega', 'chesnaughtmega', 'delphoxmega', 
-  'greninjamega', 'floettemega', 'meowsticmega', 'hawluchamega', 'crabominablemega', 
+  'greninjamega', 'floetteeternalmega', 'meowsticmega', 'hawluchamega', 'crabominablemega', 
   'drampamega', 'scovillainmega', 'glimmoramega'
 ];
