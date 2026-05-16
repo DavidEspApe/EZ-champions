@@ -1020,7 +1020,7 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-4 space-y-6">
+    <div className="max-w-7xl mx-auto p-4 space-y-6 landscape:scale-90 landscape:origin-top landscape:-mx-4 lg:landscape:scale-100 lg:landscape:mx-auto">
       <div className="grid grid-cols-1 landscape:grid-cols-[1fr_200px_1fr] lg:grid-cols-[1fr_240px_1fr] gap-4">
         <div className="flex gap-3">
           <div className="flex-1 min-w-0">{renderPlayerColumn(1, p1, p1Stats)}</div>
