@@ -13,6 +13,7 @@ export type Weather = 'None' | 'Sun' | 'Rain' | 'Sand' | 'Snow';
 export type Terrain = 'None' | 'Electric' | 'Grassy' | 'Psychic' | 'Misty';
 
 function App() {
+  const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   const [activeMode, setActiveMode] = useState<AppMode>('advanced');
   const [weather, setWeather] = useState<Weather>('None');
   const [terrain, setTerrain] = useState<Terrain>('None')
