@@ -37,7 +37,7 @@ for (const pokemon of gen.species) {
 Object.keys(POKEDEX).forEach(cleanId => {
   if (POKEDEX[cleanId].learnset.length === 0) {
     // Le quitamos el "mega", "megax" o "megay" al final del nombre
-    let baseId = cleanId.replace(/mega[xy]?$/, '');
+    let baseId = cleanId.replace(/mega[xyz]?$/, '');
     if (baseId !== cleanId && POKEDEX[baseId]) {
       POKEDEX[cleanId].learnset = [...POKEDEX[baseId].learnset];
     }
@@ -58,13 +58,17 @@ Object.keys(POKEDEX).forEach(cleanId => {
 // 2. Inyectar las Megas Custom y Formas Especiales
 Object.keys(CUSTOM_POKEDEX).forEach(customId => {
   const customData = CUSTOM_POKEDEX[customId];
-  const baseForm = customData.baseSpecies && POKEDEX[customData.baseSpecies] ? POKEDEX[customData.baseSpecies] : null;
+  const inferredBase = customId.replace(/mega$|megax$|megay$|megaz$/, '');
+  const actualBaseId = customData.baseSpecies || (inferredBase !== customId ? inferredBase : null);
+  const baseForm = actualBaseId && POKEDEX[actualBaseId] ? POKEDEX[actualBaseId] : null;
 
   const customLearnset = LEARNSETS_CUSTOM[customId];
   
   // HERENCIA DE ATAQUES
   let fallbackLearnset = baseForm ? baseForm.learnset : allMoveIds;
-  if (baseForm && customData.extraMoves) {
+  if (customData.overrideMoves || (!baseForm && customData.extraMoves)) {
+    fallbackLearnset = customData.extraMoves;
+  } else if (baseForm && customData.extraMoves) {
     fallbackLearnset = [...baseForm.learnset, ...customData.extraMoves];
   }
 

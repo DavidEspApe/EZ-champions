@@ -1,0 +1,1 @@
+const html = require('fs').readFileSync('grimmsnarl.html', 'utf-8'); const cheerio = require('cheerio'); const $ = cheerio.load(html); let o = ''; $('table.galeria-sprites.cmod3D img').each((i, el) => { o += $(el).attr('src') + '\n'; }); require('fs').writeFileSync('imgs.txt', o);

@@ -1,6 +1,8 @@
+import { BuildDropdown, SaveBuildModal } from './components/SavedBuilds';
 import { useState, useRef, useEffect, useMemo } from 'react';
-import { Crosshair, Heart, ShieldAlert, Activity, Swords, Search, ChevronDown, Zap, Sun, CloudRain, CloudFog, Snowflake, Leaf, Eye, Cloud, RotateCcw, Users, Sparkles, Package, Download, Upload, FileText, Trash2, Copy, Check } from 'lucide-react';
+import { Save, Crosshair, Heart, ShieldAlert, Activity, Swords, Search, ChevronDown, Zap, Sun, CloudRain, CloudFog, Snowflake, Leaf, Eye, Cloud, RotateCcw, Users, Sparkles, Package, Download, Upload, FileText, Trash2, Copy, Check } from 'lucide-react';
 import { useLocalStorage } from './hooks/useLocalStorage';
+import { isMegaForm, autoEquipMegaItem, getTransformData } from './core/nucleo';
 import { POKEDEX } from './data/pokedex';
 import { MOVES_DB } from './data/moves';
 import { getEffectiveness } from './data/tipos';
@@ -81,41 +83,6 @@ const getStageMod = (stage: number) => stage === 0 ? 1 : stage > 0 ? (2 + stage)
 const getSliderStyle = (val: number, colorRgba: string) => ({
   background: `linear-gradient(to right, ${colorRgba} ${(val / 32) * 100}%, white ${(val / 32) * 100}%)`
 });
-
-const isMegaForm = (speciesId: string) => {
-  if (!speciesId) return false;
-  if (speciesId === 'yanmega') return false; 
-  return speciesId.endsWith('mega') || speciesId.endsWith('megax') || speciesId.endsWith('megay');
-};
-
-const autoEquipMegaItem = (newSpeciesId: string) => {
-  if (!isMegaForm(newSpeciesId)) return null;
-  const base = newSpeciesId.replace(/megax$|megay$|mega$/, '');
-  const possibleItems = Object.keys(ITEMS_DB).filter(k => k.includes('ite') && k.startsWith(base.substring(0, 4)));
-  if (newSpeciesId.endsWith('megax')) return possibleItems.find(i => i.endsWith('x')) || 'None';
-  if (newSpeciesId.endsWith('megay')) return possibleItems.find(i => i.endsWith('y')) || 'None';
-  return possibleItems[0] || 'None';
-};
-
-const getTransformData = (speciesId: string, itemId: string) => {
-  if (!speciesId) return null;
-  if (speciesId === 'aegislash') return { target: 'aegislashblade', label: 'Blade Form' };
-  if (speciesId === 'aegislashblade') return { target: 'aegislash', label: 'Shield Form' };
-  if (speciesId === 'palafin') return { target: 'palafinhero', label: 'Hero Form' };
-  if (speciesId === 'palafinhero') return { target: 'palafin', label: 'Zero Form' };
-
-  if (isMegaForm(speciesId)) {
-    const base = speciesId.replace(/megax$|megay$|mega$/, '');
-    return { target: base, label: 'Revert Form' };
-  }
-  if (itemId && itemId !== 'None') {
-    if (POKEDEX[`${speciesId}megax`] && itemId === autoEquipMegaItem(`${speciesId}megax`)) return { target: `${speciesId}megax`, label: 'Mega Evolve X' };
-    if (POKEDEX[`${speciesId}megay`] && itemId === autoEquipMegaItem(`${speciesId}megay`)) return { target: `${speciesId}megay`, label: 'Mega Evolve Y' };
-    if (POKEDEX[`${speciesId}mega`] && itemId === autoEquipMegaItem(`${speciesId}mega`)) return { target: `${speciesId}mega`, label: 'Mega Evolve' };
-  }
-  return null;
-};
-
 
 const pokeRound = (n: number) => Math.floor(n);
 
@@ -383,7 +350,7 @@ const parseShowdown = (text: string): Partial<PlayerState> | null => {
   result.speciesId = findKey(POKEDEX, speciesStr) || 'dragapult';
   if (itemStr) result.itemId = findKey(ITEMS_DB, itemStr) || 'None';
 
-  // Añadimos la habilidad por defecto del Pokémon al importarlo
+  // Añadimos la habilidad por defecto del Pokemon al importarlo
   const importedPoke = POKEDEX[result.speciesId];
   result.abilityId = importedPoke?.abilities?.[0] || 'No Ability';
 
@@ -524,6 +491,7 @@ const ShowdownModal = ({ playerState, updateState }: { playerState: PlayerState,
 };
 
 export default function AdvancedMode({ weather, terrain, setWeather, setTerrain }: { weather?: Weather, terrain?: Terrain, setWeather?: (w: Weather) => void, setTerrain?: (t: Terrain) => void }) {
+  const [savingPlayer, setSavingPlayer] = useState<1 | 2 | null>(null);
   const [isDoubles, setIsDoubles] = useLocalStorage('adv-isDoubles', false);
   const [p1, setP1] = useLocalStorage<PlayerState>('adv-p1', createDefaultPlayer('dragapult'));
   const [p2, setP2] = useLocalStorage<PlayerState>('adv-p2', createDefaultPlayer('corviknight'));
@@ -537,7 +505,20 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
 
   const updateNested = (playerNum: 1|2, cat: 'evs'|'stages', stat: string, val: number) => {
     const setFn = playerNum === 1 ? setP1 : setP2;
-    setFn(prev => ({ ...prev, [cat]: { ...prev[cat as keyof PlayerState] as any, [stat]: val } }));
+    setFn(prev => {
+      let finalVal = val;
+      if (cat === 'evs') {
+        const currentEvs = prev.evs as Record<string, number>;
+        let sum = 0;
+        for (const key in currentEvs) {
+          if (key !== stat) sum += currentEvs[key];
+        }
+        if (sum + finalVal > 66) {
+          finalVal = 66 - sum;
+        }
+      }
+      return { ...prev, [cat]: { ...prev[cat as keyof PlayerState] as any, [stat]: finalVal } };
+    });
   };
 
   // --- MOTOR INTELIGENTE DE NATURALEZAS ---
@@ -597,17 +578,38 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
 
     return (
       <div className="bg-slate-800 rounded-xl border border-slate-700 p-4 flex flex-col gap-4 shadow-lg h-full min-w-0">
-        <div className="flex justify-between items-center border-b border-slate-700 pb-2">
-          <h3 className={`font-bold text-lg flex items-center gap-2 ${isP1 ? 'text-blue-400' : 'text-rose-400'}`}><Crosshair size={18}/> {isP1 ? 'Pokémon A' : 'Pokémon B'}</h3>
-          {/* BOTÓN INDIVIDUAL DE RESETEO */}
-          <button 
-            onClick={() => updateP(playerNum, createDefaultPlayer(pState.speciesId))} 
-            title="Reset Pokémon" 
-            className="p-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-400 hover:text-white hover:bg-rose-600 transition-colors"
-          >
-            <RotateCcw size={14}/>
-          </button>
-        </div>
+        <div className="flex justify-between items-center border-b border-slate-700 pb-2 flex-wrap gap-2">
+            <h3 className={`font-bold text-lg flex items-center gap-2 ${isP1 ? 'text-blue-400' : 'text-rose-400'}`}><Crosshair size={18}/> {isP1 ? 'Pokemon A' : 'Pokemon B'}</h3>
+            
+            <div className="flex items-center gap-2">
+              <BuildDropdown 
+                onSelect={(build) => updateP(playerNum, {
+                  ...pState,
+                  speciesId: build.speciesId,
+                  abilityId: build.abilityId,
+                  itemId: isMegaForm(build.speciesId) ? (autoEquipMegaItem(build.speciesId) || build.itemId) : build.itemId,
+                  evs: build.evs,
+                  nature: build.nature,
+                  moves: build.moves.length > 0 ? build.moves : pState.moves
+                })}
+              />
+              <button 
+                onClick={() => setSavingPlayer(playerNum)} 
+                title="Save Build" 
+                className="text-emerald-400 hover:text-white hover:bg-emerald-600 px-2 py-1.5 rounded-lg transition-colors bg-slate-900 border border-slate-700 flex items-center justify-center gap-1 shadow-sm"
+              >
+                <Save size={14} />
+              </button>
+              {/* BOT�N INDIVIDUAL DE RESETEO */}
+              <button 
+                onClick={() => updateP(playerNum, createDefaultPlayer(pState.speciesId))} 
+                title="Reset Pokemon" 
+                className="p-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-400 hover:text-white hover:bg-rose-600 transition-colors shadow-sm"
+              >
+                <RotateCcw size={14}/>
+              </button>
+            </div>
+          </div>
         
         <div className="flex flex-col md:flex-row items-center md:items-start gap-3 w-full">
           <div className="flex flex-col items-center gap-1.5 shrink-0">
@@ -671,7 +673,8 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
         {/* SHOWDOWN MODAL IMPORT/EXPORT */}
         <ShowdownModal playerState={pState} updateState={(updates) => updateP(playerNum, updates)} />
         
-        <div className="space-y-1 w-full max-w-full overflow-x-auto [&::-webkit-scrollbar]:hidden pb-2">
+        
+          <div className="space-y-1 w-full max-w-full overflow-x-auto [&::-webkit-scrollbar]:hidden pb-2">
           <div className="bg-slate-900 p-1 sm:p-2 rounded-lg border border-slate-700 flex items-center justify-between gap-1 min-w-max">
             <span className="text-[10px] sm:text-xs font-bold text-emerald-400 w-10 sm:w-12 shrink-0"><Heart size={12} className="inline mr-0.5 sm:mr-1"/>HP</span>
             <div className="shrink-0 invisible pointer-events-none"><StageSelect value={0} onChange={() => {}} /></div>
@@ -690,10 +693,17 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
               <span className="text-xs sm:text-sm font-mono text-white font-bold w-7 sm:w-8 text-right flex items-center gap-1 justify-end shrink-0">{finalStats[stat.key as StatKey]}</span>
             </div>
           ))}
-        </div>
-      </div>
-    );
-  };
+        
+      {savingPlayer && (
+        <SaveBuildModal 
+          currentBuild={savingPlayer === 1 ? p1 : p2}
+          onClose={() => setSavingPlayer(null)}
+        />
+      )}
+    </div>
+  </div>
+  );
+};
 
   const renderDamageBars = (attackerNum: 1|2, attackerState: PlayerState, defenderState: PlayerState, attackerStats: any, defenderStats: any) => {
     const attackerPoke = POKEDEX[attackerState.speciesId] || POKEDEX['dragapult'];
@@ -878,7 +888,14 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
       if (checkAbility(defenderState.abilityId, defenderAbility, 'Thick Fat', 'Sebo') && ['Fire', 'Ice'].includes(moveType)) defAbilityMod *= 0.5;
       if (checkAbility(defenderState.abilityId, defenderAbility, 'Fur Coat', 'Pelaje Recio') && move.category === 'Physical') defAbilityMod *= 0.5;
       if (checkAbility(defenderState.abilityId, defenderAbility, 'Water Bubble', 'Pompa') && moveType === 'Fire') defAbilityMod *= 0.5;
-      if (checkAbility(defenderState.abilityId, defenderAbility, 'Fluffy', 'Peluche')) {
+      if (checkAbility(defenderState.abilityId, defenderAbility, 'Aura Guard', 'Aura Protectora')) {
+          const isRemote = checkAbility(attackerState.abilityId, attackerAbility, 'Long Reach', 'Remoto');
+          const hasPads = attackerItem && attackerItem.name === 'Protective Pads';
+          if (move.flags?.includes('contact') && !isRemote && !hasPads) {
+            defAbilityMod *= 0.5;
+          }
+        }
+        if (checkAbility(defenderState.abilityId, defenderAbility, 'Fluffy', 'Peluche')) {
         if (move.flags?.includes('contact')) defAbilityMod *= 0.5;
         if (moveType === 'Fire') defAbilityMod *= 2;
       }
@@ -1081,10 +1098,17 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
       <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700 shadow-inner">
         <h3 className="text-center font-black text-slate-500 uppercase tracking-widest mb-6 text-xs">Damage Exchange</h3>
         <div className="grid grid-cols-1 landscape:grid-cols-2 md:grid-cols-2 gap-6">
-          <div className="space-y-2"><h4 className="text-sm font-bold text-blue-400 flex items-center gap-2"><Swords size={14}/> Pokémon A attacks B</h4>{renderDamageBars(1, p1, p2, p1Stats, p2Stats)}</div>
-          <div className="space-y-2"><h4 className="text-sm font-bold text-rose-400 flex items-center gap-2"><Swords size={14}/> Pokémon B attacks A</h4>{renderDamageBars(2, p2, p1, p2Stats, p1Stats)}</div>
+          <div className="space-y-2"><h4 className="text-sm font-bold text-blue-400 flex items-center gap-2"><Swords size={14}/> Pokemon A attacks B</h4>{renderDamageBars(1, p1, p2, p1Stats, p2Stats)}</div>
+          <div className="space-y-2"><h4 className="text-sm font-bold text-rose-400 flex items-center gap-2"><Swords size={14}/> Pokemon B attacks A</h4>{renderDamageBars(2, p2, p1, p2Stats, p1Stats)}</div>
         </div>
-      </div>
+      
+      {savingPlayer && (
+        <SaveBuildModal 
+          currentBuild={savingPlayer === 1 ? p1 : p2}
+          onClose={() => setSavingPlayer(null)}
+        />
+      )}
     </div>
+  </div>
   );
 }

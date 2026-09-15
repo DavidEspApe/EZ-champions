@@ -53,7 +53,7 @@ export const CHAMPIONS_ROSTER = [
   'gyaradosmega', 'aerodactylmega', 'ampharosmega', 'steelixmega', 'scizormega', 'heracrossmega',
   'houndoommega', 'tyranitarmega', 'gardevoirmega', 'sableyemega', 'aggronmega', 'medichammega',
   'manectricmega', 'sharpedomega', 'cameruptmega', 'altariamega', 'banettemega', 'absolmega',
-  'glaliemega', 'lopunnymega', 'garchompmega', 'lucariomega', 'abomasnowmega', 'gallademega', 'audinomega',
+  'glaliemega', 'lopunnymega', 'garchompmega', 'lucariomega', 'abomasnowmega', 'gallademega', 'audinomega', 'raichumegax', 'raichumegay',
 
   // Mega Evoluciones Custom de Pokémon Champions (Nuevas)
   'clefablemega', 'victreebelmega', 'starmiemega', 'dragonitemega', 'meganiummega', 
@@ -61,4 +61,141 @@ export const CHAMPIONS_ROSTER = [
   'excadrillmega', 'chandeluremega', 'golurkmega', 'chesnaughtmega', 'delphoxmega', 
   'greninjamega', 'floetteeternalmega', 'meowsticmega', 'hawluchamega', 'crabominablemega', 
   'drampamega', 'scovillainmega', 'glimmoramega'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'golisopod', 'golisopodmega'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'mawile', 'mawilemega'
+
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'vileplume'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'qwilfish'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'musharna'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'grimmsnarl'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'overqwil'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'houndstone'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'gholdengo'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'sceptile', 'sceptilemega'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'blaziken', 'blazikenmega'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'swampert', 'swampertmega'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'scolipede', 'scolipedemega'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'scrafty', 'scraftymega'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'eelektross', 'eelektrossmega'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'pyroar', 'pyroarmega'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'falinks', 'falinksmega'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'metagross', 'metagrossmega'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'staraptor', 'staraptormega'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'malamar', 'malamarmega'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'barbaracle', 'barbaraclemega'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'dragalge', 'dragalgemega'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'annihilape'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'persian'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'persianalola'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'wigglytuff'
+,
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'farfetchd'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'sirfetchd'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'mrmime'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'swalot'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'gogoat'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'rillaboom'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'cinderace'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'inteleon'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'grapploct'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'perrserker'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'thievul'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'pincurchin'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'mabosstiff'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'arboliva'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'squawkabilly'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'indeedeem', 'indeedeef'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'toxtricity'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'salamence', 'salamencemega'
+,
+  // [AUTO-SCRAPED: 2026-09-12]
+  'baxcalibur', 'baxcaliburmega', 'lucariomegaz', 'garchompmegaz', 'absolmegaz'
 ];
