@@ -674,8 +674,8 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
         <ShowdownModal playerState={pState} updateState={(updates) => updateP(playerNum, updates)} />
         
         
-          <div className="space-y-1 w-full max-w-full overflow-x-auto [&::-webkit-scrollbar]:hidden pb-2">
-          <div className="bg-slate-900 p-1 sm:p-2 rounded-lg border border-slate-700 flex items-center justify-between gap-1 min-w-max">
+          <div className="space-y-1 w-full max-w-full pb-2">
+          <div className="bg-slate-900 p-1 sm:p-2 rounded-lg border border-slate-700 flex items-center justify-between gap-1 min-w-0">
             <span className="text-[10px] sm:text-xs font-bold text-emerald-400 w-10 sm:w-12 shrink-0"><Heart size={12} className="inline mr-0.5 sm:mr-1"/>HP</span>
             <div className="shrink-0 invisible pointer-events-none"><StageSelect value={0} onChange={() => {}} /></div>
             <div className="shrink-0 invisible pointer-events-none"><NatureSelect value={1} onChange={() => {}} /></div>
@@ -684,7 +684,7 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
             <span className="text-xs sm:text-sm font-mono text-white font-bold w-7 sm:w-8 text-right flex items-center gap-1 justify-end shrink-0">{finalStats.hp}</span>
           </div>
           {[ { key: 'atk', label: 'Atk', color: 'text-rose-400', icon: Swords, accent: 'accent-rose-500', rgba: 'rgba(244, 63, 94, 0.4)' }, { key: 'def', label: 'Def', color: 'text-orange-400', icon: ShieldAlert, accent: 'accent-orange-500', rgba: 'rgba(249, 115, 22, 0.4)' }, { key: 'spa', label: 'SpA', color: 'text-purple-400', icon: Swords, accent: 'accent-purple-500', rgba: 'rgba(168, 85, 247, 0.4)' }, { key: 'spd', label: 'SpD', color: 'text-indigo-400', icon: ShieldAlert, accent: 'accent-indigo-500', rgba: 'rgba(99, 102, 241, 0.4)' }, { key: 'spe', label: 'Spe', color: 'text-blue-400', icon: Zap, accent: 'accent-blue-500', rgba: 'rgba(59, 130, 246, 0.4)' } ].map(stat => (
-            <div key={stat.key} className="bg-slate-900 p-1 sm:p-2 rounded-lg border border-slate-700 flex items-center justify-between gap-1 min-w-max">
+            <div key={stat.key} className="bg-slate-900 p-1 sm:p-2 rounded-lg border border-slate-700 flex items-center justify-between gap-1 min-w-0">
               <span className={`text-[10px] sm:text-xs font-bold ${stat.color} w-10 sm:w-12 shrink-0`}><stat.icon size={12} className="inline mr-0.5 sm:mr-1"/>{stat.label}</span>
               <div className="shrink-0"><StageSelect value={pState.stages[stat.key as StatKey]} onChange={(v) => updateNested(playerNum, 'stages', stat.key as StatKey, v)} /></div>
               <div className="shrink-0"><NatureSelect value={pState.nature[stat.key as StatKey]} onChange={(v) => handleNatureChange(playerNum, pState, stat.key as StatKey, v)} /></div>
@@ -1039,7 +1039,7 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
 
   return (
     <div className="max-w-7xl mx-auto px-1 sm:px-4 py-4 space-y-6 overflow-x-hidden">
-      <div className="w-full overflow-x-auto pb-4 scrollbar-thin">
+      <div className="w-full pb-4">
         <div className="grid grid-cols-[1fr_180px_1fr] lg:grid-cols-[1fr_200px_1fr] gap-2 min-w-[850px] xl:min-w-0 w-full">
         <div className="flex gap-3">
           <div className="flex-1 min-w-0">{renderPlayerColumn(1, p1, p1Stats)}</div>
