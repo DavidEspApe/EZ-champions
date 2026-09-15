@@ -577,7 +577,7 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
     const isP1 = playerNum === 1;
 
     return (
-      <div className="bg-slate-800 rounded-xl border border-slate-700 p-4 flex flex-col gap-4 shadow-lg h-full min-w-0">
+      <div className="bg-slate-800 rounded-xl border border-slate-700 p-2 lg:p-4 flex flex-col gap-2 lg:gap-4 shadow-lg h-full min-w-0">
         <div className="flex justify-between items-center border-b border-slate-700 pb-2 flex-wrap gap-2">
             <h3 className={`font-bold text-lg flex items-center gap-2 ${isP1 ? 'text-blue-400' : 'text-rose-400'}`}><Crosshair size={18}/> {isP1 ? 'Pokemon A' : 'Pokemon B'}</h3>
             
@@ -1040,12 +1040,10 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
   return (
     <div className="max-w-7xl mx-auto p-4 space-y-6">
       <div className="w-full overflow-x-auto pb-4 scrollbar-thin">
-        <div className="grid grid-cols-[1fr_200px_1fr] lg:grid-cols-[1fr_240px_1fr] gap-4 min-w-[900px] xl:min-w-0">
-        <div className="flex gap-3">
-          <div className="flex-1 min-w-0">{renderPlayerColumn(1, p1, p1Stats)}</div>
-        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-[1fr_240px_1fr] gap-2 lg:gap-4">
+        <div className="col-span-1 min-w-0">{renderPlayerColumn(1, p1, p1Stats)}</div>
         
-        <div className="bg-slate-800/80 rounded-xl border border-slate-600 p-4 flex flex-col gap-4 shadow-lg h-full">
+        <div className="col-span-2 lg:col-span-1 order-last lg:order-none bg-slate-800/80 rounded-xl border border-slate-600 p-2 lg:p-4 flex flex-col lg:flex-col sm:flex-row gap-4 shadow-lg h-full">
           <div className="text-center border-b border-slate-700 pb-2 flex justify-center items-center px-2"><h3 className="font-black text-slate-300 uppercase tracking-widest text-[10px] flex items-center gap-1"><Activity size={14}/> Field</h3></div>
           <div className="flex flex-col gap-2">
             <div className="flex justify-center items-center gap-1.5 bg-slate-900/80 p-1.5 rounded-xl border border-slate-700">
@@ -1088,9 +1086,7 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
             </div>
           </div>
         </div>
-        <div className="flex gap-3">
-          <div className="flex-1 min-w-0">{renderPlayerColumn(2, p2, p2Stats)}</div>
-        </div>
+        <div className="col-span-1 min-w-0">{renderPlayerColumn(2, p2, p2Stats)}</div>
       </div>
       </div>
 
