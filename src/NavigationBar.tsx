@@ -33,10 +33,7 @@ export default function NavigationBar({ activeMode, setActiveMode, weather, setW
             <img src="/ez-logo.png" alt="EZ Champions Logo" className="h-10 w-10 md:h-12 md:w-12 object-contain drop-shadow-[0_0_8px_rgba(250,204,21,0.6)]" />
           </div>
           
-          {/* TEXTO: Champions Calculator en dorado */}
-          <h1 className="text-xl font-bold tracking-tight text-yellow-500 hidden sm:block whitespace-nowrap select-none cursor-default leading-none">
-            Champions Calculator
-          </h1>
+          
         </div>
 
         {/* COLUMNA 2: MODOS (Centrado, con scroll en m?vil) */}
