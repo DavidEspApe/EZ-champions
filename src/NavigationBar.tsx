@@ -23,18 +23,16 @@ export default function NavigationBar({ activeMode, setActiveMode, weather, setW
 
   return (
     <nav className="w-full bg-slate-900 border-b border-slate-800 text-white p-4 landscape:py-1 landscape:md:py-4 sticky top-0 z-50 shadow-lg min-h-[80px] landscape:min-h-[50px] landscape:md:min-h-[80px] flex items-center relative">
+      {/* LOGO GIGANTE ESQUINA SUPERIOR IZQUIERDA */}
+      <div className="absolute top-2 left-2 md:top-2 md:left-6 flex items-center shrink-0 cursor-default select-none z-[100] hover:scale-105 transition-transform">
+        <img src="/ez-logo.png" alt="EZ Champions Logo" className="h-16 w-16 md:h-24 md:w-24 object-contain drop-shadow-[0_0_12px_rgba(250,204,21,0.8)]" />
+      </div>
+
       {/* Grid de 3 columnas fijas en desktop, flex-col en m?vil */}
       <div className="max-w-7xl mx-auto flex flex-col gap-3 landscape:gap-1 landscape:md:gap-3 md:grid md:grid-cols-3 items-center w-full">
         
         {/* COLUMNA 1: LOGO (Centrado en m?vil, Izquierda en desktop) */}
-        <div className="flex items-baseline gap-2 justify-center md:justify-start w-full">
-          {/* LOGO: Letras EZ, m?s grandes (text-3xl) y asomando por arriba */}
-          <div className="flex items-center shrink-0 cursor-default select-none">
-            <img src="/ez-logo.png" alt="EZ Champions Logo" className="h-10 w-10 md:h-12 md:w-12 object-contain drop-shadow-[0_0_8px_rgba(250,204,21,0.6)]" />
-          </div>
-          
-          
-        </div>
+        <div className="hidden md:block w-full"></div>
 
         {/* COLUMNA 2: MODOS (Centrado, con scroll en m?vil) */}
         <div className="flex justify-center w-full overflow-x-auto md:overflow-visible p-1 md:p-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
