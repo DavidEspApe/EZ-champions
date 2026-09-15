@@ -577,7 +577,7 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
     const isP1 = playerNum === 1;
 
     return (
-      <div className="bg-slate-800 rounded-xl border border-slate-700 p-4 flex flex-col gap-4 shadow-lg h-full min-w-0">
+      <div className="bg-slate-800 rounded-xl border border-slate-700 p-2 lg:p-4 flex flex-col gap-2 lg:gap-4 shadow-lg h-full min-w-0 overflow-hidden">
         <div className="flex justify-between items-center border-b border-slate-700 pb-2 flex-wrap gap-2">
             <h3 className={`font-bold text-lg flex items-center gap-2 ${isP1 ? 'text-blue-400' : 'text-rose-400'}`}><Crosshair size={18}/> {isP1 ? 'Pokemon A' : 'Pokemon B'}</h3>
             
@@ -1038,9 +1038,9 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-4 space-y-6">
+    <div className="max-w-7xl mx-auto px-1 sm:px-4 py-4 space-y-6 overflow-x-hidden">
       <div className="w-full overflow-x-auto pb-4 scrollbar-thin">
-        <div className="grid grid-cols-[1fr_200px_1fr] lg:grid-cols-[1fr_240px_1fr] gap-4 min-w-[900px] xl:min-w-0">
+        <div className="grid grid-cols-[1fr_180px_1fr] lg:grid-cols-[1fr_200px_1fr] gap-2 min-w-[850px] xl:min-w-0 w-full">
         <div className="flex gap-3">
           <div className="flex-1 min-w-0">{renderPlayerColumn(1, p1, p1Stats)}</div>
         </div>
@@ -1097,7 +1097,7 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
 
       <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700 shadow-inner">
         <h3 className="text-center font-black text-slate-500 uppercase tracking-widest mb-6 text-xs">Damage Exchange</h3>
-        <div className="grid grid-cols-1 landscape:grid-cols-2 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 landscape:grid-cols-2 md:grid-cols-2 gap-2 md:gap-4">
           <div className="space-y-2"><h4 className="text-sm font-bold text-blue-400 flex items-center gap-2"><Swords size={14}/> Pokemon A attacks B</h4>{renderDamageBars(1, p1, p2, p1Stats, p2Stats)}</div>
           <div className="space-y-2"><h4 className="text-sm font-bold text-rose-400 flex items-center gap-2"><Swords size={14}/> Pokemon B attacks A</h4>{renderDamageBars(2, p2, p1, p2Stats, p1Stats)}</div>
         </div>
