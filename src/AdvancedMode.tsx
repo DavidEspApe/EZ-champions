@@ -577,7 +577,7 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
     const isP1 = playerNum === 1;
 
     return (
-      <div className="bg-slate-800 rounded-xl border border-slate-700 p-2 lg:p-4 flex flex-col gap-2 lg:gap-4 shadow-lg h-full min-w-0">
+      <div className="bg-slate-800 rounded-xl border border-slate-700 p-4 flex flex-col gap-4 shadow-lg h-full min-w-0">
         <div className="flex justify-between items-center border-b border-slate-700 pb-2 flex-wrap gap-2">
             <h3 className={`font-bold text-lg flex items-center gap-2 ${isP1 ? 'text-blue-400' : 'text-rose-400'}`}><Crosshair size={18}/> {isP1 ? 'Pokemon A' : 'Pokemon B'}</h3>
             
@@ -675,7 +675,7 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
         
         
           <div className="space-y-1 w-full max-w-full overflow-x-auto [&::-webkit-scrollbar]:hidden pb-2">
-          <div className="bg-slate-900 px-0.5 sm:px-2 py-1 sm:py-2 rounded-lg border border-slate-700 flex items-center justify-between gap-0.5 sm:gap-1 min-w-0">
+          <div className="bg-slate-900 p-1 sm:p-2 rounded-lg border border-slate-700 flex items-center justify-between gap-1 min-w-max">
             <span className="text-[10px] sm:text-xs font-bold text-emerald-400 w-10 sm:w-12 shrink-0"><Heart size={12} className="inline mr-0.5 sm:mr-1"/>HP</span>
             <div className="shrink-0 invisible pointer-events-none"><StageSelect value={0} onChange={() => {}} /></div>
             <div className="shrink-0 invisible pointer-events-none"><NatureSelect value={1} onChange={() => {}} /></div>
@@ -684,7 +684,7 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
             <span className="text-xs sm:text-sm font-mono text-white font-bold w-7 sm:w-8 text-right flex items-center gap-1 justify-end shrink-0">{finalStats.hp}</span>
           </div>
           {[ { key: 'atk', label: 'Atk', color: 'text-rose-400', icon: Swords, accent: 'accent-rose-500', rgba: 'rgba(244, 63, 94, 0.4)' }, { key: 'def', label: 'Def', color: 'text-orange-400', icon: ShieldAlert, accent: 'accent-orange-500', rgba: 'rgba(249, 115, 22, 0.4)' }, { key: 'spa', label: 'SpA', color: 'text-purple-400', icon: Swords, accent: 'accent-purple-500', rgba: 'rgba(168, 85, 247, 0.4)' }, { key: 'spd', label: 'SpD', color: 'text-indigo-400', icon: ShieldAlert, accent: 'accent-indigo-500', rgba: 'rgba(99, 102, 241, 0.4)' }, { key: 'spe', label: 'Spe', color: 'text-blue-400', icon: Zap, accent: 'accent-blue-500', rgba: 'rgba(59, 130, 246, 0.4)' } ].map(stat => (
-            <div key={stat.key} className="bg-slate-900 px-0.5 sm:px-2 py-1 sm:py-2 rounded-lg border border-slate-700 flex items-center justify-between gap-0.5 sm:gap-1 min-w-0">
+            <div key={stat.key} className="bg-slate-900 p-1 sm:p-2 rounded-lg border border-slate-700 flex items-center justify-between gap-1 min-w-max">
               <span className={`text-[10px] sm:text-xs font-bold ${stat.color} w-10 sm:w-12 shrink-0`}><stat.icon size={12} className="inline mr-0.5 sm:mr-1"/>{stat.label}</span>
               <div className="shrink-0"><StageSelect value={pState.stages[stat.key as StatKey]} onChange={(v) => updateNested(playerNum, 'stages', stat.key as StatKey, v)} /></div>
               <div className="shrink-0"><NatureSelect value={pState.nature[stat.key as StatKey]} onChange={(v) => handleNatureChange(playerNum, pState, stat.key as StatKey, v)} /></div>
@@ -1038,12 +1038,14 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-1 py-4 sm:p-4 space-y-4 sm:space-y-6 overflow-x-hidden">
+    <div className="max-w-7xl mx-auto p-4 space-y-6 mobile-zoom">
       <div className="w-full overflow-x-auto pb-4 scrollbar-thin">
-        <div className="grid grid-cols-2 lg:grid-cols-[1fr_240px_1fr] gap-1 sm:gap-2 lg:gap-4 w-full">
-        <div className="col-span-1 min-w-0">{renderPlayerColumn(1, p1, p1Stats)}</div>
+        <div className="grid grid-cols-[1fr_200px_1fr] lg:grid-cols-[1fr_240px_1fr] gap-4 min-w-[900px] xl:min-w-0">
+        <div className="flex gap-3">
+          <div className="flex-1 min-w-0">{renderPlayerColumn(1, p1, p1Stats)}</div>
+        </div>
         
-        <div className="col-span-2 lg:col-span-1 order-last lg:order-none bg-slate-800/80 rounded-xl border border-slate-600 p-2 lg:p-4 flex flex-col lg:flex-col sm:flex-row gap-4 shadow-lg h-full">
+        <div className="bg-slate-800/80 rounded-xl border border-slate-600 p-4 flex flex-col gap-4 shadow-lg h-full">
           <div className="text-center border-b border-slate-700 pb-2 flex justify-center items-center px-2"><h3 className="font-black text-slate-300 uppercase tracking-widest text-[10px] flex items-center gap-1"><Activity size={14}/> Field</h3></div>
           <div className="flex flex-col gap-2">
             <div className="flex justify-center items-center gap-1.5 bg-slate-900/80 p-1.5 rounded-xl border border-slate-700">
@@ -1086,7 +1088,9 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
             </div>
           </div>
         </div>
-        <div className="col-span-1 min-w-0">{renderPlayerColumn(2, p2, p2Stats)}</div>
+        <div className="flex gap-3">
+          <div className="flex-1 min-w-0">{renderPlayerColumn(2, p2, p2Stats)}</div>
+        </div>
       </div>
       </div>
 
