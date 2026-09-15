@@ -327,7 +327,7 @@ export default function SpeedMode({ weather, terrain, setWeather, setTerrain }: 
   }, []);
 
   return (
-    <div className="flex flex-col text-slate-200 mobile-zoom">
+    <div className="flex flex-col text-slate-200">
       <div className="bg-slate-900 border-b border-slate-700 p-4 shrink-0 shadow-sm relative z-20 flex flex-col sm:flex-row justify-between items-center gap-4">
         <div>
           <h2 className="text-xl font-bold flex items-center gap-2 text-blue-400">

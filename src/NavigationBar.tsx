@@ -11,6 +11,8 @@ interface NavProps {
   onFeedback: () => void;
 }
 
+const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
 export default function NavigationBar({ activeMode, setActiveMode, weather, setWeather, terrain, setTerrain, onSupport, onFeedback }: NavProps) {
   const [showDonation, setShowDonation] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
@@ -83,6 +85,21 @@ export default function NavigationBar({ activeMode, setActiveMode, weather, setW
       
       
       
+    
+      {/* Botones (Solo en Desktop) */}
+      {!isMobileDevice && (
+        <div className="absolute right-4 flex items-center z-[100]">
+          <button onClick={onFeedback} className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 border border-blue-500/30 rounded-full text-xs font-bold transition-all hover:scale-105 mr-2">
+            <MessageSquare size={14} className="text-blue-400" />
+            <span>Feedback</span>
+          </button>
+          <button onClick={onSupport} className="flex items-center gap-1.5 px-3 py-1.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 rounded-full text-xs font-bold transition-all hover:scale-105">
+            <Heart size={14} className="fill-rose-400" />
+            <span>Support</span>
+          </button>
+        </div>
+      )}
     </nav>
+
   );
 }

@@ -45,14 +45,14 @@ function App() {
 
             <footer className="w-full text-center p-6 text-[10px] text-slate-500 max-w-5xl mx-auto border-t border-slate-800/50 mt-8 mb-4 flex flex-col items-center gap-4">
         <p>Disclaimer: Pokemon, all character names, images, and related assets are trademarks and copyright (c) of Nintendo, Creatures Inc., Game Freak, and The Pokemon Company. This website is an unofficial, non-profit fan-created tool intended for community analysis and entertainment. It is not affiliated with, endorsed, sponsored, or supported by Nintendo or The Pokemon Company in any way.</p>
-        <div className="flex justify-center items-center gap-4 mt-2">
+        {isMobileDevice && <div className="flex justify-center items-center gap-4 mt-2">
           <button onClick={() => setShowFeedback(true)} className="flex items-center gap-1.5 px-4 py-2 bg-blue-500/10 text-blue-400 border border-blue-500/30 rounded-full text-xs font-bold transition-all hover:scale-105">
             <MessageSquare size={14} className="text-blue-400" /> Feedback
           </button>
           <button onClick={() => setShowDonation(true)} className="flex items-center gap-1.5 px-4 py-2 bg-rose-500/10 text-rose-400 border border-rose-500/30 rounded-full text-xs font-bold transition-all hover:scale-105">
             <Heart size={14} className="fill-rose-400" /> Support
           </button>
-        </div>
+        </div>}
       </footer>
       <DonationModal isOpen={showDonation} onClose={() => setShowDonation(false)} />
       <FeedbackModal isOpen={showFeedback} onClose={() => setShowFeedback(false)} />
