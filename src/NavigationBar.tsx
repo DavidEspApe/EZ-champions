@@ -29,9 +29,8 @@ export default function NavigationBar({ activeMode, setActiveMode, weather, setW
         {/* COLUMNA 1: LOGO (Centrado en m?vil, Izquierda en desktop) */}
         <div className="flex items-baseline gap-2 justify-center md:justify-start w-full">
           {/* LOGO: Letras EZ, m?s grandes (text-3xl) y asomando por arriba */}
-          <div className="flex items-baseline shrink-0 font-black italic text-3xl tracking-tighter cursor-default select-none leading-none">
-            <span className="text-red-500">E</span>
-            <span className="text-white">Z</span>
+          <div className="flex items-center shrink-0 cursor-default select-none">
+            <img src="/ez-logo.png" alt="EZ Champions Logo" className="h-10 w-10 md:h-12 md:w-12 object-contain drop-shadow-[0_0_8px_rgba(250,204,21,0.6)]" />
           </div>
           
           {/* TEXTO: Champions Calculator en dorado */}
