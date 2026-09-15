@@ -24,8 +24,8 @@ export default function NavigationBar({ activeMode, setActiveMode, weather, setW
   return (
     <nav className="w-full bg-slate-900 border-b border-slate-800 text-white p-4 landscape:py-1 landscape:md:py-4 sticky top-0 z-50 shadow-lg min-h-[80px] landscape:min-h-[50px] landscape:md:min-h-[80px] flex items-center relative">
       {/* LOGO GIGANTE ESQUINA SUPERIOR IZQUIERDA */}
-      <div className="absolute top-2 left-2 md:top-2 md:left-6 flex items-center shrink-0 cursor-default select-none z-[100] hover:scale-105 transition-transform">
-        <img src="/ez-logo.png" alt="EZ Champions Logo" className="h-16 w-16 md:h-24 md:w-24 object-contain drop-shadow-[0_0_12px_rgba(250,204,21,0.8)]" />
+      <div className="absolute top-1/2 -translate-y-1/2 left-2 md:left-6 flex items-center shrink-0 cursor-default select-none z-[100] hover:scale-105 transition-transform">
+        <img src="/ez-logo.png" alt="EZ Champions Logo" className="h-14 w-14 md:h-[70px] md:w-[70px] object-contain drop-shadow-[0_0_12px_rgba(250,204,21,0.8)]" />
       </div>
 
       {/* Grid de 3 columnas fijas en desktop, flex-col en m?vil */}
