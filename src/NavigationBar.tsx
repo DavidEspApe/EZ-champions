@@ -1,17 +1,17 @@
 import { Zap, Crosshair, Shield, Settings, Sun, CloudRain, CloudFog, Snowflake, Leaf, Eye, Cloud, Coffee, Heart } from 'lucide-react';
 import type { AppMode, Weather, Terrain } from './App';
 import { useState } from 'react';
-import DonationModal from './DonationModal';
-import FeedbackModal from './FeedbackModal';
 import { MessageSquare } from 'lucide-react';
 
 interface NavProps {
   activeMode: AppMode; setActiveMode: (mode: AppMode) => void;
   weather: Weather; setWeather: (w: Weather) => void;
   terrain: Terrain; setTerrain: (t: Terrain) => void;
+  onSupport: () => void;
+  onFeedback: () => void;
 }
 
-export default function NavigationBar({ activeMode, setActiveMode, weather, setWeather, terrain, setTerrain }: NavProps) {
+export default function NavigationBar({ activeMode, setActiveMode, weather, setWeather, terrain, setTerrain, onSupport, onFeedback }: NavProps) {
   const [showDonation, setShowDonation] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const modes = [
@@ -80,16 +80,16 @@ export default function NavigationBar({ activeMode, setActiveMode, weather, setW
       </div>
     
       {/* Bot?n de Support con posici?n absoluta en la esquina superior derecha */}
-      <div className="absolute top-4 right-8 md:top-1/2 md:-translate-y-1/2 md:right-8 flex items-center z-[100]">
+      <div className="absolute md:top-1/2 md:-translate-y-1/2 md:right-8 hidden md:flex items-center z-[100]">
         <button 
-          onClick={() => setShowFeedback(true)}
+          onClick={onFeedback}
           className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 border border-blue-500/30 rounded-full text-xs font-bold transition-all hover:scale-105 mr-2"
         >
           <MessageSquare size={14} />
           <span className="hidden md:inline">Feedback</span>
         </button>
         <button 
-          onClick={() => setShowDonation(true)}
+          onClick={onSupport}
           className="flex items-center gap-1.5 px-3 py-1.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 rounded-full text-xs font-bold transition-all hover:scale-105"
         >
           <Heart size={14} className="fill-rose-400" />
@@ -97,9 +97,7 @@ export default function NavigationBar({ activeMode, setActiveMode, weather, setW
         </button>
       </div>
       
-      {/* Modal flotante global */}
-      <DonationModal isOpen={showDonation} onClose={() => setShowDonation(false)} />
-      <FeedbackModal isOpen={showFeedback} onClose={() => setShowFeedback(false)} />
+      
     </nav>
   );
 }
