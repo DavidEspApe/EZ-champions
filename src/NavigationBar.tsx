@@ -80,22 +80,7 @@ export default function NavigationBar({ activeMode, setActiveMode, weather, setW
       </div>
     
       {/* Bot?n de Support con posici?n absoluta en la esquina superior derecha */}
-      <div className="absolute md:top-1/2 md:-translate-y-1/2 md:right-8 hidden md:flex items-center z-[100]">
-        <button 
-          onClick={onFeedback}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 border border-blue-500/30 rounded-full text-xs font-bold transition-all hover:scale-105 mr-2"
-        >
-          <MessageSquare size={14} />
-          <span className="hidden md:inline">Feedback</span>
-        </button>
-        <button 
-          onClick={onSupport}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 rounded-full text-xs font-bold transition-all hover:scale-105"
-        >
-          <Heart size={14} className="fill-rose-400" />
-          <span className="hidden md:inline">Support</span>
-        </button>
-      </div>
+      
       
       
     </nav>
