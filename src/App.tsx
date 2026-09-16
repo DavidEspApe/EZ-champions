@@ -36,8 +36,7 @@ function App() {
         weather={weather} 
         setWeather={setWeather} 
         terrain={terrain} 
-        setTerrain={setTerrain} 
-      />
+        setTerrain={setTerrain} onSupport={() => setShowDonation(true)} onFeedback={() => setShowFeedback(true)} />
       
       <main className="container mx-auto px-4 py-4 md:py-8 md:px-8">
         {activeMode === 'speed' && <SpeedMode weather={weather} terrain={terrain} setWeather={setWeather} setTerrain={setTerrain} />}

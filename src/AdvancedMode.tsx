@@ -1,5 +1,5 @@
 import { BuildDropdown, SaveBuildModal } from './components/SavedBuilds';
-import { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Save, Crosshair, Heart, ShieldAlert, Activity, Swords, Search, ChevronDown, Zap, Sun, CloudRain, CloudFog, Snowflake, Leaf, Eye, Cloud, RotateCcw, Users, Sparkles, Package, Download, Upload, FileText, Trash2, Copy, Check } from 'lucide-react';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { isMegaForm, autoEquipMegaItem, getTransformData } from './core/nucleo';
@@ -268,7 +268,7 @@ const MoveSelector = ({ selectedMoveId, onSelect, learnset }: { selectedMoveId: 
   );
 };
 
-const EvInput = ({ value, onChange }: { value: number, onChange: (v: number) => void }) => {
+const EvInput = React.memo(({ value, onChange }: { value: number, onChange: (v: number) => void }) => {
   const [val, setVal] = useState(value.toString());
   useEffect(() => setVal(value.toString()), [value]);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -277,7 +277,7 @@ const EvInput = ({ value, onChange }: { value: number, onChange: (v: number) => 
     if (!isNaN(parsed)) onChange(Math.min(32, Math.max(0, parsed)));
   };
   return <input type="number" min="0" max="32" value={val} onChange={handleChange} onBlur={() => {let p=parseInt(val,10); if(isNaN(p)||p<0)p=0; if(p>32)p=32; setVal(p.toString()); onChange(p);}} className="w-8 text-[10px] text-center font-bold bg-slate-800 border border-slate-600 rounded text-white focus:border-blue-400 focus:bg-slate-700 outline-none transition-colors [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />;
-};
+}, (prev, next) => prev.value === next.value);
 
 // --- COMPONENTE: BOTONES DE NATURALEZA ---
 const NatureSelect = ({ value, onChange }: { value: number, onChange: (v: number) => void }) => (
@@ -1037,12 +1037,17 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
     });
   };
 
+    const p1Col = useMemo(() => renderPlayerColumn(1, p1, p1Stats), [p1, p1Stats, isDoubles, weather, terrain]);
+  const p2Col = useMemo(() => renderPlayerColumn(2, p2, p2Stats), [p2, p2Stats, isDoubles, weather, terrain]);
+  const damageBars = useMemo(() => renderDamageBars(1, p1, p2, p1Stats, p2Stats), [p1, p2, p1Stats, p2Stats, isDoubles, weather, terrain]);
+  const damageBars2 = useMemo(() => renderDamageBars(2, p2, p1, p2Stats, p1Stats), [p1, p2, p1Stats, p2Stats, isDoubles, weather, terrain]);
+
   return (
-    <div className="max-w-7xl mx-auto px-1 sm:px-4 py-4 space-y-6 overflow-x-hidden">
+      <div className="max-w-7xl mx-auto px-1 sm:px-4 py-4 space-y-6 overflow-x-hidden">
       <div className="w-full pb-4">
         <div className="grid grid-cols-[1fr_180px_1fr] lg:grid-cols-[1fr_200px_1fr] gap-2 min-w-[850px] xl:min-w-0 w-full">
         <div className="flex gap-3">
-          <div className="flex-1 min-w-0">{renderPlayerColumn(1, p1, p1Stats)}</div>
+          <div className="flex-1 min-w-0">{p1Col}</div>
         </div>
         
         <div className="bg-slate-800/80 rounded-xl border border-slate-600 p-4 flex flex-col gap-4 shadow-lg h-full">
@@ -1089,7 +1094,7 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
           </div>
         </div>
         <div className="flex gap-3">
-          <div className="flex-1 min-w-0">{renderPlayerColumn(2, p2, p2Stats)}</div>
+          <div className="flex-1 min-w-0">{p2Col}</div>
         </div>
       </div>
       </div>
@@ -1098,8 +1103,8 @@ export default function AdvancedMode({ weather, terrain, setWeather, setTerrain 
       <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700 shadow-inner">
         <h3 className="text-center font-black text-slate-500 uppercase tracking-widest mb-6 text-xs">Damage Exchange</h3>
         <div className="grid grid-cols-1 landscape:grid-cols-2 md:grid-cols-2 gap-2 md:gap-4">
-          <div className="space-y-2"><h4 className="text-sm font-bold text-blue-400 flex items-center gap-2"><Swords size={14}/> Pokemon A attacks B</h4>{renderDamageBars(1, p1, p2, p1Stats, p2Stats)}</div>
-          <div className="space-y-2"><h4 className="text-sm font-bold text-rose-400 flex items-center gap-2"><Swords size={14}/> Pokemon B attacks A</h4>{renderDamageBars(2, p2, p1, p2Stats, p1Stats)}</div>
+          <div className="space-y-2"><h4 className="text-sm font-bold text-blue-400 flex items-center gap-2"><Swords size={14}/> Pokemon A attacks B</h4>{damageBars}</div>
+          <div className="space-y-2"><h4 className="text-sm font-bold text-rose-400 flex items-center gap-2"><Swords size={14}/> Pokemon B attacks A</h4>{damageBars2}</div>
         </div>
       
       {savingPlayer && (
